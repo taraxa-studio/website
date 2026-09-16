@@ -7,9 +7,11 @@
  * (@telegram-apps/telegram-ui) uses the same shape: icon over label,
  * four to five items, the current one filled.
  *
- * The lens is one element moved with a transform; it glides to whatever
- * tab is hovered and settles back on the current page. With the client
- * router the bar persists between pages, so it also glides on navigation.
+ * The lens is one element moved with a transform. It moves only on a
+ * click. The bar is persisted across Astro page navigations, so on each
+ * astro:page-load the current tab is recomputed and the lens glides there.
+ * On a hard load, the tab you came from is read back from sessionStorage
+ * and the lens glides in from it. Hover only darkens the label.
  */
 import Icon from "@/components/Icon.astro";
 import { nav } from "@/lib/site";
@@ -70,9 +72,6 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
     transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
   }
-  [data-hover] .tab-lens {
-    transform: translateX(calc(var(--hover) * 100%));
-  }
   /* Unlayered, so it wins over the utility layer: the tab under the lens is
      always white, whether it is the current page or the hovered one. */
   .tab { color: color-mix(in oklch, var(--foreground) 80%, transparent); }
@@ -84,38 +83,44 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
 </style>
 
 <script>
-  // Glide the lens to the hovered tab, settle back on the current page.
-  // Re-run after each client-side navigation so the current tab updates.
-  const setup = () => {
-    const bar = document.querySelector<HTMLElement>("#tabbar > div");
+  const KEY = "taraxa:tab";
+  const bar = document.querySelector<HTMLElement>("#tabbar > div");
+
+  const sync = (navigated = false) => {
     if (!bar) return;
     const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>("a[data-tab]"));
-
     const path = window.location.pathname.replace(/\/$/, "") || "/";
-    let active = Math.max(0, links.findIndex((a) => a.getAttribute("href") === path));
-    bar.style.setProperty("--active", String(active));
-    const paint = (on: number) => links.forEach((a, i) => a.setAttribute("data-on", i === on ? "1" : "0"));
-    paint(active);
+    const active = Math.max(0, links.findIndex((a) => a.getAttribute("href") === path));
     links.forEach((a, i) => {
+      a.setAttribute("data-on", i === active ? "1" : "0");
       if (i === active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
-
-    if (!bar.dataset.bound) {
-      bar.dataset.bound = "1";
-      links.forEach((a, i) => {
-        a.addEventListener("pointerenter", (e) => {
-          if (e.pointerType !== "mouse") return;
-          bar.style.setProperty("--hover", String(i));
-          bar.setAttribute("data-hover", "");
-          paint(i);
-        });
-      });
-      bar.addEventListener("pointerleave", () => {
-        bar.removeAttribute("data-hover");
-        paint(Number(bar.style.getPropertyValue("--active") || 0));
-      });
+    const apply = () => bar.style.setProperty("--active", String(active));
+    if (navigated) {
+      // The persisted bar was just re-inserted; flush styles so the change
+      // has a "before" state to transition from, then apply on a fresh frame.
+      void bar.offsetWidth;
+      requestAnimationFrame(() => requestAnimationFrame(apply));
+    } else {
+      apply();
     }
+    try { sessionStorage.setItem(KEY, String(active)); } catch {}
   };
-  setup();
-  document.addEventListener("astro:page-load", setup);
+
+  // Hard load: start the lens on the tab the visitor came from, then glide.
+  if (bar) {
+    let from = -1;
+    try { from = Number(sessionStorage.getItem(KEY) ?? -1); } catch {}
+    const current = Number(bar.dataset.active || 0);
+    const lens = bar.querySelector<HTMLElement>("#tab-lens");
+    if (lens && from >= 0 && from !== current) {
+      lens.style.transition = "none";
+      bar.style.setProperty("--active", String(from));
+      void lens.offsetWidth;
+      lens.style.transition = "";
+    }
+  }
+  sync();
+  // Client-side navigation: the bar persists, so just move the lens.
+  document.addEventListener("astro:page-load", () => sync(true));
 </script>

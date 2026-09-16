@@ -3,7 +3,6 @@ import Base from "@/layouts/Base.astro";
 import { CopyEmail } from "@/components/CopyEmail";
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
-import snow from "@/assets/images/dandelion-snow.jpg";
 import { site } from "@/lib/site";
 
 const schema = [
@@ -24,17 +23,17 @@ const schema = [
   schema={schema}
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 pb-14 text-center sm:pt-16 sm:pb-16">
-    <h1 class="t-hero rise">Contact</h1>
-    <p class="t-body rise mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg [animation-delay:80ms]">
+    <h1 class="t-hero">Contact</h1>
+    <p class="t-body mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg">
       Email is the best way to reach us. We read everything and reply within a few days.
     </p>
     <a
       href={`mailto:${site.email}`}
-      class="t-tile rise mt-10 inline-block break-all rounded-sm outline-none hover:underline hover:underline-offset-4 focus-visible:ring-2 focus-visible:ring-ring [animation-delay:140ms]"
+      class="t-tile mt-10 inline-block break-all rounded-sm outline-none hover:underline hover:underline-offset-4 focus-visible:ring-2 focus-visible:ring-ring"
     >
       {site.email}
     </a>
-    <div class="rise mt-7 flex flex-wrap items-center justify-center gap-2 [animation-delay:200ms]">
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-2">
       <a href={`mailto:${site.email}`} class={buttonVariants()}>Send an email</a>
       <CopyEmail client:idle email={site.email} />
     </div>
@@ -42,11 +41,10 @@ const schema = [
 
   <section class="mx-auto max-w-[1024px] px-5 pb-20 sm:px-6 sm:pb-24">
     <Image
-      src={snow}
+      src="/images/dandelion-snow.webp"
       alt="A single dandelion standing in snow."
-      widths={[768, 1280, 1920]}
-      sizes="(min-width: 1072px) 976px, 100vw"
-      format="webp"
+      width={1600}
+      height={2000}
       class="aspect-[4/5] w-full rounded-2xl object-cover sm:aspect-[16/9]"
       loading="eager"
     />

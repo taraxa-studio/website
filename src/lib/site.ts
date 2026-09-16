@@ -69,6 +69,10 @@ export const novelos = {
       body: "Histories, cultures, magic systems, and dates kept in one place and attached to the scenes that use them, instead of six loose documents.",
     },
     {
+      title: "AI portraits for your cast",
+      body: "Create a character from a few lines, then generate portraits that follow one art direction, so the same face shows up in book three. Optional, on your own key.",
+    },
+    {
       title: "Optional AI, your own key",
       body: "Revision help that shows the original, the rewrite, and the reason. It runs on your own API key, so you pay the provider and never us. Off by default.",
     },

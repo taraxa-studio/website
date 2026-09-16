@@ -5,7 +5,7 @@
  */
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter/opsz.css";
+@import "@fontsource-variable/inter/wght.css";
 
 
 @theme inline {
@@ -194,6 +194,50 @@
 }
 @media (prefers-reduced-transparency: reduce) {
   .glass { background: var(--background); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Moving border for the founder avatar, after ui.aceternity.com/components/moving-border:
+   a soft light travels along the border path while the ring itself stays faint.
+   The light is a blurred radial blob moved along a circle with offset-path.
+   Browsers without offset-path get a rotating conic beam instead. */
+@keyframes orbit { to { offset-distance: 100%; } }
+@property --beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes beam { to { --beam: 360deg; } }
+@utility ring-beam {
+  position: relative;
+  display: inline-block;
+  border-radius: 9999px;
+  padding: 5px;
+  overflow: hidden;
+  isolation: isolate;
+  background: color-mix(in oklch, var(--foreground) 12%, transparent);
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(from var(--beam), transparent 0 70%, var(--foreground) 86%, transparent 100%);
+    animation: beam 4s linear infinite;
+  }
+  @supports (offset-path: circle(1px)) {
+    &::before {
+      inset: auto;
+      top: 0;
+      left: 0;
+      width: 64px;
+      height: 64px;
+      background: radial-gradient(circle, var(--foreground) 0 34%, transparent 64%);
+      filter: blur(4px);
+      offset-path: circle(calc(50% - 2px) at 50% 50%);
+      offset-anchor: center;
+      offset-rotate: 0deg;
+      animation: orbit 3.2s linear infinite;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring-beam::before { animation: none; }
 }
 
 @keyframes rise {

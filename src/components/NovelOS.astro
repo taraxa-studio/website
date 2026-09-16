@@ -7,7 +7,6 @@
 import { Image } from "astro:assets";
 import Icon from "@/components/Icon.astro";
 import { buttonVariants } from "@/components/ui/button";
-import logo from "@/assets/images/novelos-logo.webp";
 import { novelos } from "@/lib/site";
 
 interface Props {
@@ -19,7 +18,7 @@ const domain = novelos.url.replace(/^https?:\/\//, "");
 ---
 
 <div class="mx-auto flex flex-col items-center rounded-[28px] bg-panel px-5 py-20 text-center sm:px-8 sm:py-24">
-  <Image src={logo} alt="" width={96} height={96} densities={[1, 2]} class="size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="lazy" />
+  <Image src="/images/novelos-logo.webp" alt="" width={192} height={192} class="size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="lazy" />
   <Heading id="novelos" class="t-panel mt-8">{novelos.name}</Heading>
   <p class="t-sub mt-2">{novelos.short}</p>
   <p class="t-body mx-auto mt-4 max-w-lg text-muted-foreground">{novelos.description}</p>

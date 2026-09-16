@@ -4,8 +4,6 @@ import Chevron from "@/components/Chevron.astro";
 import Founder from "@/components/Founder.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
-import stem from "@/assets/images/dandelion-stem.jpg";
-import dark from "@/assets/images/dandelion-dark.jpg";
 import { site } from "@/lib/site";
 
 const schema = [
@@ -27,33 +25,44 @@ const schema = [
 >
   <!-- Centered title and two-line intro, as on openai.com/about -->
   <section class="mx-auto max-w-3xl px-5 pt-12 pb-16 text-center sm:pt-16 sm:pb-20">
-    <h1 class="t-hero rise">About</h1>
-    <p class="t-body rise mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg [animation-delay:80ms]">
+    <h1 class="t-hero">About</h1>
+    <p class="t-body mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg">
       Taraxa Studio is a small software studio in {site.country}. We make simple apps for people who create.
     </p>
   </section>
 
   <!-- Text left, rounded image right -->
   <section class="mx-auto grid max-w-[1024px] items-center gap-10 px-5 pb-24 sm:px-6 lg:grid-cols-12 lg:gap-12" aria-labelledby="name">
-    <div class="lg:col-span-5">
+    <div class="lg:col-span-6">
       <h2 id="name" class="t-tile">The name</h2>
-      <p class="t-body mt-5 max-w-md">
-        Taraxa comes from Taraxacum, the dandelion. It is a plain plant that spreads by letting go. We like that idea, so it became our mark.
-      </p>
+      <div class="t-body mt-5 max-w-lg space-y-4 text-foreground/90">
+        <p>
+          Taraxa comes from Taraxacum, the Latin name for the dandelion. It is the most ordinary flower there is. It grows in cracks in the pavement, on roadsides, in fields nobody planted. It asks for nothing and it keeps coming back.
+        </p>
+        <p>
+          A dandelion lives two lives. First it is a bright yellow flower that opens with the sun. Then it turns into a white globe of seeds, and it lets them go. Each seed has its own small parachute and drifts wherever the wind takes it. The plant does not hold on to what it made. That is how it spreads.
+        </p>
+        <p>
+          People have always read meaning into that. In many cultures the dandelion stands for hope, for wishes, and for starting over. It is a symbol of resilience because you cannot really get rid of it, and of humility because nobody thinks of it as precious. Every part of it can be eaten or used, so it is also a symbol of giving.
+        </p>
+        <p>
+          We build software the same way. Each app is small and light, so it can land anywhere and take root fast. We do not lock your work inside our tools. Like the seed, your files should travel freely, and what you make should outlive the thing you made it with.
+        </p>
+      </div>
       <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
         <a href="/work" class={buttonVariants({ variant: "secondary" })}>See our work</a>
         <a href="/contact" class={buttonVariants({ variant: "link" })}>Contact<Chevron /></a>
       </div>
     </div>
-    <div class="lg:col-span-7">
+    <div class="lg:col-span-6">
       <Image
-        src={stem}
+        src="/images/dandelion-stem.webp"
         alt="A dandelion with a curved stem, drawn in black on white."
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 1024px) 580px, 100vw"
-        format="webp"
+        width={960}
+        height={1200}
         class="aspect-square w-full rounded-2xl object-cover"
         loading="eager"
+        fetchpriority="high"
       />
     </div>
   </section>
@@ -68,11 +77,10 @@ const schema = [
   <!-- Full-width rounded photo -->
   <section class="mx-auto max-w-[1024px] px-5 py-16 sm:px-6 sm:py-20">
     <Image
-      src={dark}
+      src="/images/dandelion-dark.webp"
       alt="A white dandelion seed head on a black background."
-      widths={[768, 1280, 1920]}
-      sizes="(min-width: 1072px) 976px, 100vw"
-      format="webp"
+      width={1400}
+      height={1858}
       class="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_60%] sm:aspect-[16/9]"
       loading="lazy"
     />

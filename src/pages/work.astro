@@ -40,9 +40,9 @@ const schema = [
   schema={schema}
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 pb-12 text-center sm:pt-16">
-    <h1 class="t-hero rise">Work</h1>
-    <p class="t-body rise mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg [animation-delay:80ms]">
-      One app is out. Two more are on the way. Each one does a single job.
+    <h1 class="t-hero">Work</h1>
+    <p class="t-body mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg">
+      A studio for each craft. Writing today, pixel art and type design next.
     </p>
   </section>
 
@@ -50,7 +50,8 @@ const schema = [
     <NovelOS />
   </section>
 
-  <section class="pb-3" aria-label="Upcoming products">
+  <section class="pb-3" aria-labelledby="next">
+    <h2 id="next" class="sr-only">Coming next</h2>
     <Tiles />
   </section>
 </Base>

@@ -23,12 +23,12 @@ pnpm preview
 
 ```
 src/
-  assets/images/   photos (lummi.ai dandelions), NovelOS screenshot, founder avatar
   components/      Nav (top brand bar), BottomNav (glass tab bar), Footer, Mark, Icon, Flag, Chevron, Tiles, NovelOS, Founder, CopyEmail, Dandelion (seed burst)
   layouts/Base.astro   head, SEO meta, JSON-LD, font preload, nav and footer
   lib/site.ts      names, links, NovelOS facts (platforms, features, price), upcoming apps, nav. Edit copy here first.
   pages/           index, work, about, contact, 404
 public/
+  images/          WebP photos (lummi.ai dandelions), NovelOS logo, founder avatar, pre-sized to 2x display
   robots.txt, llms.txt, site.webmanifest, favicons, og.jpg
 ```
 
@@ -36,7 +36,10 @@ public/
 
 - Light only. The palette and type scale follow apple.com and openai.com: white and #f5f5f7 panels, #1d1d1f ink, 56px panel headlines, 28px subheads, 44px pill buttons, 44px translucent nav.
 - Home is a stack of full-bleed panels: hero with an isolated dandelion, NovelOS Studio, two product tiles, a photo panel, a statement, the founder.
-- Navigation is a floating glass tab bar after Telegram's Liquid Glass bottom bar (`BottomNav.astro`): one dark lens slides under the hovered or current tab. The bar and the seed canvas are marked `transition:persist`, and `ClientRouter` is on, so the lens glides on navigation instead of snapping. The top bar carries only the mark and wordmark, centered.
+- Navigation is a floating glass tab bar after Telegram's Liquid Glass bottom bar (`BottomNav.astro`): one dark lens sits under the current tab and glides to the next one on click. Astro's `ClientRouter` handles page navigation; the bar and the seed canvas are `transition:persist`, and the lens position is also kept in sessionStorage for hard loads. Hover only darkens a label.
+- Images live in `public/images/` as WebP and are rendered through Astro's `<Image>` with explicit width and height. They are pre-sized to about twice their largest display size, so no build-time processing is needed.
+- The founder avatar has a moving border in the style of ui.aceternity.com/components/moving-border, done in CSS with `offset-path` (a conic fallback where unsupported).
+- Lighthouse (mobile and desktop) scores 100 on performance, accessibility, best practices, and SEO on every page. Keep it that way: no React on the home page, no fade-in on LCP elements, fonts preloaded.
 - The cursor is the normal system cursor. `Dandelion.astro` releases a puff of seeds on a clean click only (no drag, no text selection, not inside a field), skipped under `prefers-reduced-motion`.
 - Brand icons: GitHub from `simple-icons`, LinkedIn inlined in `Icon.astro` (simple-icons no longer ships it).
 - Search and AI-search files live in `public/`: `robots.txt` allows the major AI crawlers, `llms.txt` describes the studio, and the sitemap is generated at build.
