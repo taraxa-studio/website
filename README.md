@@ -19,6 +19,16 @@ pnpm build      # writes dist/
 pnpm preview
 ```
 
+## Deploy
+
+The site runs on Cloudflare Workers with static assets (Cloudflare folded Pages into Workers). Config is in `wrangler.jsonc`; `worker/index.ts` only redirects www to the apex domain and serves `dist/`.
+
+- Every push to `main` runs `.github/workflows/deploy.yml`: install, build, `wrangler deploy`.
+- The workflow needs one GitHub secret, `CLOUDFLARE_API_TOKEN`, made from the "Edit Cloudflare Workers" template plus `Zone > DNS > Edit` for taraxa.studio.
+- Manual deploy from a machine with `wrangler login`: `pnpm build && npx wrangler deploy`.
+- URLs: https://taraxa.studio (custom domain), https://taraxa-website.classes.workers.dev (always-on preview).
+- Trailing slashes are canonical (`trailingSlash: "always"` in Astro, `auto-trailing-slash` in wrangler). `public/_headers` adds security headers.
+
 ## Layout
 
 ```
@@ -27,6 +37,7 @@ src/
   layouts/Base.astro   head, SEO meta, JSON-LD, font preload, nav and footer
   lib/site.ts      names, links, NovelOS facts (platforms, features, price), upcoming apps, nav. Edit copy here first.
   pages/           index, work, about, contact, 404
+worker/index.ts    edge entry: www redirect, then static assets
 public/
   images/          WebP photos (lummi.ai dandelions), NovelOS logo, founder avatar, pre-sized to 2x display
   robots.txt, llms.txt, site.webmanifest, favicons, og.jpg

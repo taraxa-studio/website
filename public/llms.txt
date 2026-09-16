@@ -13,9 +13,9 @@ The name comes from Taraxacum, the Latin name for the dandelion, which is also t
 ## Pages
 
 - [Home](https://taraxa.studio/): What the studio makes and how it works.
-- [Work](https://taraxa.studio/work): The product list.
-- [About](https://taraxa.studio/about): The studio, the name, and the founder.
-- [Contact](https://taraxa.studio/contact): Email hello@taraxa.studio.
+- [Work](https://taraxa.studio/work/): The product list.
+- [About](https://taraxa.studio/about/): The studio, the name, and the founder.
+- [Contact](https://taraxa.studio/contact/): Email hello@taraxa.studio.
 
 ## Founder
 

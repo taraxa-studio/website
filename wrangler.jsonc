@@ -1,0 +1,22 @@
+{
+  // Cloudflare Workers with static assets (the successor to Cloudflare Pages).
+  // `pnpm build` writes dist/, `wrangler deploy` uploads it to the edge.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "taraxa-website",
+  "account_id": "f160e4a6084227619bb33b5dcbbfc125",
+  "compatibility_date": "2026-09-15",
+  "main": "./worker/index.ts",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    { "pattern": "taraxa.studio", "custom_domain": true },
+    { "pattern": "www.taraxa.studio", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

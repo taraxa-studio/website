@@ -18,8 +18,9 @@
 import { Image } from "astro:assets";
 import { nav } from "@/lib/site";
 
-const current = Astro.url.pathname.replace(/\/$/, "") || "/";
-const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
+const norm = (p: string) => p.replace(/\/+$/, "") || "/";
+const current = norm(Astro.url.pathname);
+const activeIndex = Math.max(0, nav.findIndex((n) => norm(n.href) === current));
 ---
 
 <nav
@@ -93,8 +94,9 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
   const sync = (navigated = false) => {
     if (!bar) return;
     const links = Array.from(bar.querySelectorAll<HTMLAnchorElement>("a[data-tab]"));
-    const path = window.location.pathname.replace(/\/$/, "") || "/";
-    const active = Math.max(0, links.findIndex((a) => a.getAttribute("href") === path));
+    const norm = (p: string) => p.replace(/\/+$/, "") || "/";
+    const path = norm(window.location.pathname);
+    const active = Math.max(0, links.findIndex((a) => norm(a.getAttribute("href") || "") === path));
     links.forEach((a, i) => {
       a.setAttribute("data-on", i === active ? "1" : "0");
       if (i === active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
