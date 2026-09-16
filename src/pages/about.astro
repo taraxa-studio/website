@@ -1,8 +1,11 @@
 ---
 import Base from "@/layouts/Base.astro";
+import Chevron from "@/components/Chevron.astro";
 import Founder from "@/components/Founder.astro";
+import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
 import stem from "@/assets/images/dandelion-stem.jpg";
+import dark from "@/assets/images/dandelion-dark.jpg";
 import { site } from "@/lib/site";
 
 const schema = [
@@ -22,38 +25,70 @@ const schema = [
   description="Taraxa Studio is a small software studio based in Indonesia, founded by Ribhararnus Pracutian. The name comes from Taraxacum, the dandelion."
   schema={schema}
 >
-  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:pt-20 lg:pb-28">
-    <div class="lg:col-span-6">
-      <h1 class="display rise text-5xl sm:text-6xl">A small studio in Indonesia.</h1>
-      <div class="rise mt-8 space-y-5 text-lg leading-relaxed text-muted-foreground sm:text-xl [animation-delay:80ms]">
-        <p class="measure">
-          Taraxa Studio makes software for people who create. We keep each app small so it stays easy to learn and easy to trust.
-        </p>
-        <p class="measure">
-          The name comes from Taraxacum, the dandelion. It is a plain plant that spreads by letting go. We like that idea, so it became our mark.
-        </p>
-        <p class="measure">
-          Our first app is NovelOS Studio, for writers. PixelOS Studio and TypeOS Studio come next.
-        </p>
+  <!-- Centered title and two-line intro, as on openai.com/about -->
+  <section class="mx-auto max-w-3xl px-5 pt-20 pb-16 text-center sm:pt-24 sm:pb-20">
+    <h1 class="t-hero rise">About</h1>
+    <p class="t-body rise mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg [animation-delay:80ms]">
+      Taraxa Studio is a small software studio in {site.country}. We make simple apps for people who create.
+    </p>
+  </section>
+
+  <!-- Text left, rounded image right -->
+  <section class="mx-auto grid max-w-[1024px] items-center gap-10 px-5 pb-24 sm:px-6 lg:grid-cols-12 lg:gap-12" aria-labelledby="name">
+    <div class="lg:col-span-5">
+      <h2 id="name" class="t-tile">The name</h2>
+      <p class="t-body mt-5 max-w-md">
+        Taraxa comes from Taraxacum, the dandelion. It is a plain plant that spreads by letting go. We like that idea, so it became our mark.
+      </p>
+      <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <a href="/work" class={buttonVariants({ variant: "secondary" })}>See our work</a>
+        <a href="/contact" class={buttonVariants({ variant: "link" })}>Contact<Chevron /></a>
       </div>
     </div>
-    <div class="rise lg:col-span-5 lg:col-start-8 [animation-delay:120ms]">
+    <div class="lg:col-span-7">
       <Image
         src={stem}
         alt="A dandelion with a curved stem, drawn in black on white."
         widths={[640, 960, 1280]}
-        sizes="(min-width: 1400px) 520px, (min-width: 1024px) 40vw, 100vw"
+        sizes="(min-width: 1024px) 580px, 100vw"
         format="webp"
-        class="aspect-[4/5] w-full rounded-2xl object-cover"
+        class="aspect-square w-full rounded-2xl object-cover"
         loading="eager"
       />
     </div>
   </section>
 
-  <section class="mx-auto w-full max-w-[1400px] px-4 pb-24 sm:px-6 lg:px-10 lg:pb-32" aria-labelledby="founder">
-    <div class="border-t border-border/60 pt-10 lg:pt-14">
-      <h2 id="founder" class="mb-8 text-sm font-medium text-muted-foreground">Founder</h2>
-      <Founder size="lg" />
+  <!-- Big centered statement -->
+  <section class="mx-auto max-w-3xl px-5 py-8 text-center sm:py-12">
+    <p class="t-statement">
+      We keep each app small so it stays easy to learn and easy to trust.
+    </p>
+  </section>
+
+  <!-- Full-width rounded photo -->
+  <section class="mx-auto max-w-[1024px] px-5 py-16 sm:px-6 sm:py-20">
+    <Image
+      src={dark}
+      alt="A white dandelion seed head on a black background."
+      widths={[768, 1280, 1920]}
+      sizes="(min-width: 1072px) 976px, 100vw"
+      format="webp"
+      class="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_60%] sm:aspect-[16/9]"
+      loading="lazy"
+    />
+  </section>
+
+  <!-- Founder -->
+  <section class="mx-auto max-w-3xl px-5 pt-4 pb-20 sm:pb-24" aria-labelledby="founder">
+    <h2 id="founder" class="t-tile mb-10 text-center">Founder</h2>
+    <Founder />
+  </section>
+
+  <!-- Gray rounded call to action -->
+  <section class="px-3 pb-3">
+    <div class="mx-auto flex flex-col items-center rounded-[28px] bg-panel px-6 py-20 text-center sm:py-24">
+      <h2 class="t-panel">Say hello.</h2>
+      <a href="/contact" class:list={[buttonVariants({ variant: "secondary" }), "mt-8 bg-white hover:bg-white/70"]}>Contact us</a>
     </div>
   </section>
 </Base>

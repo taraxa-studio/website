@@ -1,47 +1,33 @@
 ---
+/**
+ * Centered founder block in the OpenAI "people" register:
+ * avatar, name, role, two gray pill links.
+ */
 import { Image } from "astro:assets";
 import avatar from "@/assets/images/ribhararnus.jpg";
+import Icon from "@/components/Icon.astro";
+import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/lib/site";
-
-interface Props {
-  size?: "sm" | "lg";
-}
-const { size = "sm" } = Astro.props;
-const big = size === "lg";
 ---
 
-<div class:list={["flex items-center", big ? "gap-6" : "gap-4"]}>
+<div class="flex flex-col items-center text-center">
   <Image
     src={avatar}
     alt={site.founder.name}
-    width={big ? 96 : 56}
-    height={big ? 96 : 56}
+    width={112}
+    height={112}
     densities={[1, 2]}
-    class:list={["shrink-0 rounded-full object-cover", big ? "size-24" : "size-14"]}
+    class="size-28 rounded-full object-cover"
     loading="lazy"
   />
-  <div class="min-w-0">
-    <p class:list={["font-medium tracking-tight", big ? "text-2xl" : "text-base"]}>
-      {site.founder.name}
-    </p>
-    <p class="text-sm text-muted-foreground">Founder</p>
-    <p class="mt-1 flex gap-4 text-sm">
-      <a
-        href={site.founder.github}
-        rel="me noopener"
-        target="_blank"
-        class="link-quiet rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        GitHub
-      </a>
-      <a
-        href={site.founder.linkedin}
-        rel="me noopener"
-        target="_blank"
-        class="link-quiet rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        LinkedIn
-      </a>
-    </p>
+  <p class="mt-5 text-[21px] font-semibold tracking-tight">{site.founder.name}</p>
+  <p class="t-body mt-0.5 text-muted-foreground">Founder</p>
+  <div class="mt-5 flex gap-2">
+    <a href={site.founder.github} rel="me noopener" target="_blank" class={buttonVariants({ variant: "secondary", size: "sm" })}>
+      <Icon name="github" class="size-4" />GitHub
+    </a>
+    <a href={site.founder.linkedin} rel="me noopener" target="_blank" class={buttonVariants({ variant: "secondary", size: "sm" })}>
+      <Icon name="linkedin" class="size-4" />LinkedIn
+    </a>
   </div>
 </div>

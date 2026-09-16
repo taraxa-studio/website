@@ -1,101 +1,98 @@
 ---
 import Base from "@/layouts/Base.astro";
-import ThemePicture from "@/components/ThemePicture.astro";
-import NovelOS from "@/components/NovelOS.astro";
-import Upcoming from "@/components/Upcoming.astro";
+import Chevron from "@/components/Chevron.astro";
+import Tiles from "@/components/Tiles.astro";
 import Founder from "@/components/Founder.astro";
 import { buttonVariants } from "@/components/ui/button";
-import heroLight from "@/assets/images/dandelion-hero.jpg";
-import heroDark from "@/assets/images/dandelion-dark.jpg";
-import howLight from "@/assets/images/dandelion-dark.jpg";
-import howDark from "@/assets/images/dandelion-soft.jpg";
+import { Image } from "astro:assets";
+import hero from "@/assets/images/dandelion-hero.jpg";
+import dark from "@/assets/images/dandelion-dark.jpg";
+import logo from "@/assets/images/novelos-logo.webp";
 import { site } from "@/lib/site";
 
-const values = [
-  {
-    title: "One job, done well.",
-    body: "Each app has a clear purpose. We leave the rest out.",
-  },
-  {
-    title: "Quiet by design.",
-    body: "No pop-ups and no noise. The screen belongs to your work.",
-  },
-  {
-    title: "Made to last.",
-    body: "Small team, careful changes, and files that stay yours.",
-  },
-];
+const novelos = site.products[0];
+const domain = novelos.url.replace(/^https?:\/\//, "");
 ---
 
 <Base>
-  <!-- Hero -->
-  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 pt-10 pb-16 sm:px-6 lg:min-h-[calc(100dvh-3.5rem)] lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10 lg:pt-6 lg:pb-12">
-    <div class="rise lg:col-span-5">
-      <h1 class="display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">{site.tagline}</h1>
-      <p class="measure mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl">
-        Taraxa Studio makes small, focused apps. One job each, done with care.
-      </p>
-      <div class="mt-8">
-        <a href="/work" class={buttonVariants({ className: "h-11 rounded-full px-6 text-base font-medium" })}>
-          See our work
+  <!-- Panel 1: hero. Centered copy, then the photo edge to edge. -->
+  <section class="bg-background" aria-labelledby="hero">
+    <div class="mx-auto max-w-3xl px-5 pt-20 pb-12 text-center sm:pt-24 sm:pb-14">
+      <h1 id="hero" class="t-hero rise">{site.tagline}</h1>
+      <p class="t-sub rise mt-3 [animation-delay:80ms]">Small apps that do one job well.</p>
+      <div class="rise mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 [animation-delay:140ms]">
+        <a href="/work" class={buttonVariants()}>See our work</a>
+        <a href="/about" class={buttonVariants({ variant: "link" })}>About the studio<Chevron /></a>
+      </div>
+    </div>
+    <div class="mx-auto max-w-2xl px-5 pb-8 sm:pb-12">
+      <Image
+        src={hero}
+        alt="A white dandelion seed head on a white background."
+        widths={[640, 960, 1280, 1600]}
+        sizes="(min-width: 720px) 672px, 100vw"
+        format="webp"
+        quality={85}
+        class="rise mx-auto w-full max-w-[560px] [animation-delay:200ms]"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <!-- Panel 2: NovelOS Studio on gray, product image below the copy. -->
+  <section class="bg-panel" aria-labelledby="novelos">
+    <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
+      <Image src={logo} alt="" width={96} height={96} densities={[1, 2]} class="mx-auto size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="lazy" />
+      <h2 id="novelos" class="t-panel mt-8">{novelos.name}</h2>
+      <p class="t-sub mt-2">{novelos.short}</p>
+      <p class="t-body mt-3 text-muted-foreground">Available for Windows and macOS.</p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+        <a href="/work" class={buttonVariants()}>Learn more</a>
+        <a href={novelos.url} rel="noopener" target="_blank" class={buttonVariants({ variant: "link" })}>
+          Visit {domain}<Chevron />
         </a>
       </div>
     </div>
-    <div class="rise lg:col-span-7 [animation-delay:120ms]">
-      <ThemePicture
-        light={heroLight}
-        dark={heroDark}
-        alt="A dandelion seed head photographed in black and white."
-        loading="eager"
-        fetchpriority="high"
-        sizes="(min-width: 1400px) 780px, (min-width: 1024px) 58vw, 100vw"
-        class="aspect-[4/5] w-full rounded-2xl object-cover sm:aspect-[5/4] lg:aspect-[4/5] lg:max-h-[calc(100dvh-6.5rem)]"
-      />
+  </section>
+
+  <!-- Panel 3: two tiles for what comes next. -->
+  <section class="bg-background py-3" aria-label="Upcoming products">
+    <Tiles />
+  </section>
+
+  <!-- Panel 4: full-bleed photo with the studio's promise. -->
+  <section class="relative isolate flex min-h-[640px] items-start justify-center overflow-hidden bg-[oklch(0.1_0_0)] text-white sm:min-h-[760px]" aria-labelledby="promise">
+    <Image
+      src={dark}
+      alt=""
+      widths={[768, 1280, 1920, 2560]}
+      sizes="100vw"
+      format="webp"
+      quality={82}
+      class="absolute inset-0 -z-10 size-full object-cover object-[50%_4%]"
+      loading="lazy"
+    />
+    <div class="absolute inset-x-0 top-0 -z-10 h-1/2 bg-gradient-to-b from-black/70 to-transparent" aria-hidden="true"></div>
+    <div class="mx-auto max-w-3xl px-5 pt-20 text-center sm:pt-24">
+      <h2 id="promise" class="t-panel">Quiet by design.</h2>
+      <p class="t-sub mt-3 text-white/85">No pop-ups and no noise. The screen belongs to your work.</p>
     </div>
   </section>
 
-  <!-- Work -->
-  <section class="mx-auto w-full max-w-[1400px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28" aria-labelledby="work">
-    <h2 id="work" class="display text-4xl sm:text-5xl">Work</h2>
-    <div class="mt-12">
-      <NovelOS />
-    </div>
-    <div class="mt-16 lg:mt-20">
-      <h3 class="mb-6 text-sm font-medium text-muted-foreground">Next</h3>
-      <Upcoming />
+  <!-- Panel 5: the promise in one paragraph. -->
+  <section class="bg-panel" aria-labelledby="how">
+    <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
+      <h2 id="how" class="t-panel">Made to last.</h2>
+      <p class="t-statement mx-auto mt-6 max-w-2xl text-muted-foreground">
+        Each app has a clear purpose. We leave the rest out, change things slowly, and keep your files yours.
+      </p>
     </div>
   </section>
 
-  <!-- How we work -->
-  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:py-28" aria-labelledby="how">
-    <div class="lg:col-span-5">
-      <ThemePicture
-        light={howLight}
-        dark={howDark}
-        alt="A white dandelion seed head on a black background."
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 1400px) 560px, (min-width: 1024px) 42vw, 100vw"
-        class="aspect-[4/5] w-full rounded-2xl object-cover"
-      />
-    </div>
-    <div class="lg:col-span-6 lg:col-start-7 lg:self-center">
-      <h2 id="how" class="display text-4xl sm:text-5xl">How we work</h2>
-      <ul class="mt-10 divide-y divide-border/60">
-        {
-          values.map((v) => (
-            <li class="py-6 first:pt-0 last:pb-0">
-              <h3 class="text-2xl font-medium tracking-tight">{v.title}</h3>
-              <p class="measure mt-2 text-lg leading-relaxed text-muted-foreground">{v.body}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- Founder -->
-  <section class="mx-auto w-full max-w-[1400px] px-4 pb-24 sm:px-6 lg:px-10 lg:pb-32" aria-labelledby="founder">
-    <div class="border-t border-border/60 pt-10">
+  <!-- Panel 6: founder. -->
+  <section class="bg-background" aria-labelledby="founder">
+    <div class="mx-auto max-w-3xl px-5 py-20 sm:py-24">
       <h2 id="founder" class="sr-only">Founder</h2>
       <Founder />
     </div>

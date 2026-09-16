@@ -1,18 +1,16 @@
-/* Hallmark · macrostructure: Marquee Hero · tone: austere · anchor hue: neutral (monochrome)
- * genre: modern-minimal · theme: custom (paper oklch(99% 0 0) · ink oklch(14.5% 0 0) · no chromatic accent)
- * display: Hanken Grotesk 500 · body: Hanken Grotesk 400 · nav: N1a (3 destinations) · footer: Ft1 single row
- * Hallmark · pre-emit critique: P5 H5 E4 S4 R5 V4
+/* Hallmark · macrostructure: Stacked Panels (Apple / OpenAI DNA) · tone: austere · anchor hue: neutral (monochrome, light only)
+ * genre: modern-minimal · theme: studied-DNA (source: apple.com + openai.com/about)
+ * paper #fff / #f5f5f7 · ink #1d1d1f · muted #6e6e73 · display + body: Inter (opsz) · nav: 44px translucent · footer: link columns
+ * Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4
  */
 @import "tailwindcss";
-@import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/hanken-grotesk";
+@import "@fontsource-variable/inter/opsz.css";
 
-@custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
-    --font-sans: 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', ui-sans-serif, system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,6 +42,7 @@
     --color-card: var(--card);
     --color-foreground: var(--foreground);
     --color-background: var(--background);
+    --color-panel: var(--panel);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -55,21 +54,21 @@
 
 :root {
     --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --foreground: oklch(0.215 0.004 286);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
+    --primary: oklch(0.215 0.004 286);
     --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
+    --secondary: oklch(0.955 0.002 286);
     --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
+    --muted: oklch(0.972 0.002 286);
+    --muted-foreground: oklch(0.535 0.006 286);
+    --accent: oklch(0.955 0.002 286);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
+    --border: oklch(0.89 0.003 286);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
     --chart-1: oklch(0.87 0 0);
@@ -78,6 +77,7 @@
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.75rem;
+    --panel: oklch(0.972 0.002 286);
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -88,65 +88,25 @@
     --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
-  button:not(:disabled), [role="button"]:not(:disabled) {
-    cursor: pointer;
-    }
+  }
   html {
-    @apply font-sans;
-    }
-}
-/* ---- Taraxa Studio base ---- */
-@layer base {
-  html {
+    @apply font-sans bg-background text-foreground;
+    color-scheme: light;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: clip;
+    font-feature-settings: "cv11", "ss03", "calt";
   }
   body {
+    @apply bg-background text-foreground;
     overflow-x: clip;
-    font-feature-settings: "ss01", "cv11";
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
   }
   ::selection {
     background: var(--foreground);
@@ -160,37 +120,76 @@
   p {
     text-wrap: pretty;
   }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
 }
 
-@utility display {
+/* Type scale copied from the references: 80/56/40/28/21/17/14 */
+@utility t-hero {
+  font-size: clamp(2.75rem, 2rem + 4vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+@utility t-panel {
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.07;
+}
+@utility t-tile {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+@utility t-sub {
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+}
+@utility t-statement {
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
   font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+@utility t-body {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+@utility t-small {
+  font-size: 0.875rem;
+  line-height: 1.45;
 }
 
 @utility measure {
   max-width: 62ch;
 }
 
-@utility link-quiet {
-  text-decoration-line: underline;
-  text-decoration-color: color-mix(in oklch, var(--foreground) 25%, transparent);
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-  transition: text-decoration-color 200ms cubic-bezier(0.2, 0, 0, 1);
-  &:hover { text-decoration-color: var(--foreground); }
+@utility link-chevron {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  font-weight: 400;
+  text-decoration: none;
+  &:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @utility rise {
   animation: rise 700ms cubic-bezier(0.2, 0, 0, 1) both;
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation-duration: 120ms; animation-name: none; opacity: 1; transform: none; }
-  html { scroll-behavior: auto; }
+  .rise { animation: none; }
 }

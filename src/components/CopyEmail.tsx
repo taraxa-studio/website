@@ -16,6 +16,21 @@ export function CopyEmail({ email }: { email: string }) {
     try {
       await navigator.clipboard.writeText(email);
       setState("copied");
+      return;
+    } catch {
+      // fall through to the legacy path
+    }
+    try {
+      const el = document.createElement("textarea");
+      el.value = email;
+      el.setAttribute("readonly", "");
+      el.style.position = "fixed";
+      el.style.opacity = "0";
+      document.body.appendChild(el);
+      el.select();
+      const ok = document.execCommand("copy");
+      el.remove();
+      setState(ok ? "copied" : "failed");
     } catch {
       setState("failed");
     }
@@ -25,13 +40,7 @@ export function CopyEmail({ email }: { email: string }) {
     state === "copied" ? "Copied" : state === "failed" ? "Could not copy" : "Copy address";
 
   return (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={copy}
-      aria-live="polite"
-      className="h-11 rounded-full px-5 text-sm font-medium"
-    >
+    <Button type="button" variant="secondary" onClick={copy} aria-live="polite">
       {label}
     </Button>
   );
