@@ -201,7 +201,6 @@
    The light is a blurred radial blob moved along a circle with offset-path.
    Browsers without offset-path get a rotating conic beam instead. */
 @keyframes orbit { to { offset-distance: 100%; } }
-@keyframes hue { to { filter: blur(4px) hue-rotate(360deg); } }
 @property --beam { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 @keyframes beam { to { --beam: 360deg; } }
 @utility ring-beam {
@@ -218,7 +217,7 @@
     z-index: -1;
     inset: 0;
     border-radius: inherit;
-    background: conic-gradient(from var(--beam), transparent 0 58%, #38bdf8 72%, #a78bfa 84%, #f472b6 94%, transparent 100%);
+    background: conic-gradient(from var(--beam), transparent 0 58%, #34d399 72%, #38bdf8 84%, #8b5cf6 94%, transparent 100%);
     animation: beam 4s linear infinite;
   }
   @supports (offset-path: circle(1px)) {
@@ -228,12 +227,12 @@
       left: 0;
       width: 64px;
       height: 64px;
-      background: radial-gradient(circle, #38bdf8 0 22%, #a78bfa 40%, #f472b6 52%, transparent 66%);
+      background: radial-gradient(circle, #34d399 0 18%, #38bdf8 38%, #8b5cf6 52%, transparent 66%);
       filter: blur(4px);
       offset-path: circle(calc(50% - 2px) at 50% 50%);
       offset-anchor: center;
       offset-rotate: 0deg;
-      animation: orbit 3.2s linear infinite, hue 6s linear infinite;
+      animation: orbit 3.2s linear infinite;
     }
   }
 }
