@@ -1,14 +1,9 @@
 ---
 import Base from "@/layouts/Base.astro";
-import Chevron from "@/components/Chevron.astro";
 import Tiles from "@/components/Tiles.astro";
-import { buttonVariants } from "@/components/ui/button";
-import { Image } from "astro:assets";
-import logo from "@/assets/images/novelos-logo.webp";
-import { site } from "@/lib/site";
+import NovelOS from "@/components/NovelOS.astro";
+import { site, novelos } from "@/lib/site";
 
-const novelos = site.products[0];
-const domain = novelos.url.replace(/^https?:\/\//, "");
 const schema = [
   {
     "@type": "CollectionPage",
@@ -25,7 +20,15 @@ const schema = [
     url: novelos.url,
     description: novelos.description,
     applicationCategory: "Writing",
-    operatingSystem: "Windows, macOS",
+    operatingSystem: "Windows, macOS, Android, iOS",
+    featureList: novelos.features.join(", "),
+    offers: {
+      "@type": "Offer",
+      price: novelos.price.amount,
+      priceCurrency: novelos.price.currency,
+      url: novelos.url,
+      description: "One-time payment, lifetime personal license.",
+    },
     author: { "@id": `${site.url}/#organization` },
   },
 ];
@@ -33,28 +36,18 @@ const schema = [
 
 <Base
   title="Work"
-  description="Software made by Taraxa Studio: NovelOS Studio for writers, with PixelOS Studio and TypeOS Studio in progress."
+  description="Software made by Taraxa Studio: NovelOS Studio for writers ($45, pay once), with PixelOS Studio for 2D artists and TypeOS Studio for type foundries in progress."
   schema={schema}
 >
-  <section class="mx-auto max-w-3xl px-5 pt-20 pb-16 text-center sm:pt-24">
+  <section class="mx-auto max-w-3xl px-5 pt-12 pb-12 text-center sm:pt-16">
     <h1 class="t-hero rise">Work</h1>
     <p class="t-body rise mx-auto mt-5 max-w-xl text-muted-foreground sm:text-lg [animation-delay:80ms]">
       One app is out. Two more are on the way. Each one does a single job.
     </p>
   </section>
 
-  <!-- NovelOS: the one shipped app, on a gray panel. -->
   <section class="px-3 pb-3" aria-labelledby="novelos">
-    <div class="mx-auto flex flex-col items-center rounded-[28px] bg-panel px-6 py-20 text-center sm:py-24">
-      <Image src={logo} alt="" width={96} height={96} densities={[1, 2]} class="size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="eager" />
-      <h2 id="novelos" class="t-panel mt-8">{novelos.name}</h2>
-      <p class="t-sub mt-2">{novelos.short}</p>
-      <p class="t-body mx-auto mt-5 max-w-md text-muted-foreground">{novelos.description}</p>
-      <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-        <a href={novelos.url} rel="noopener" target="_blank" class={buttonVariants()}>Visit {domain}</a>
-        <a href="/about" class={buttonVariants({ variant: "link" })}>About the studio<Chevron /></a>
-      </div>
-    </div>
+    <NovelOS />
   </section>
 
   <section class="pb-3" aria-label="Upcoming products">

@@ -2,22 +2,18 @@
 import Base from "@/layouts/Base.astro";
 import Chevron from "@/components/Chevron.astro";
 import Tiles from "@/components/Tiles.astro";
+import NovelOS from "@/components/NovelOS.astro";
 import Founder from "@/components/Founder.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
 import hero from "@/assets/images/dandelion-hero.jpg";
-import dark from "@/assets/images/dandelion-dark.jpg";
-import logo from "@/assets/images/novelos-logo.webp";
 import { site } from "@/lib/site";
-
-const novelos = site.products[0];
-const domain = novelos.url.replace(/^https?:\/\//, "");
 ---
 
 <Base>
-  <!-- Panel 1: hero. Centered copy, then the photo edge to edge. -->
+  <!-- Panel 1: hero. Centered copy, then the flower alone on white. -->
   <section class="bg-background" aria-labelledby="hero">
-    <div class="mx-auto max-w-3xl px-5 pt-20 pb-12 text-center sm:pt-24 sm:pb-14">
+    <div class="mx-auto max-w-3xl px-5 pt-12 pb-10 text-center sm:pt-16 sm:pb-12">
       <h1 id="hero" class="t-hero rise">{site.tagline}</h1>
       <p class="t-sub rise mt-3 [animation-delay:80ms]">Small apps that do one job well.</p>
       <div class="rise mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 [animation-delay:140ms]">
@@ -25,7 +21,7 @@ const domain = novelos.url.replace(/^https?:\/\//, "");
         <a href="/about" class={buttonVariants({ variant: "link" })}>About the studio<Chevron /></a>
       </div>
     </div>
-    <div class="mx-auto max-w-2xl px-5 pb-8 sm:pb-12">
+    <div class="mx-auto max-w-2xl px-5 pb-6 sm:pb-8">
       <Image
         src={hero}
         alt="A white dandelion seed head on a white background."
@@ -40,48 +36,18 @@ const domain = novelos.url.replace(/^https?:\/\//, "");
     </div>
   </section>
 
-  <!-- Panel 2: NovelOS Studio on gray, product image below the copy. -->
-  <section class="bg-panel" aria-labelledby="novelos">
-    <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
-      <Image src={logo} alt="" width={96} height={96} densities={[1, 2]} class="mx-auto size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="lazy" />
-      <h2 id="novelos" class="t-panel mt-8">{novelos.name}</h2>
-      <p class="t-sub mt-2">{novelos.short}</p>
-      <p class="t-body mt-3 text-muted-foreground">Available for Windows and macOS.</p>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-        <a href="/work" class={buttonVariants()}>Learn more</a>
-        <a href={novelos.url} rel="noopener" target="_blank" class={buttonVariants({ variant: "link" })}>
-          Visit {domain}<Chevron />
-        </a>
-      </div>
-    </div>
+  <!-- Panel 2: NovelOS Studio. -->
+  <section class="px-3 pb-3" aria-labelledby="novelos">
+    <NovelOS />
   </section>
 
   <!-- Panel 3: two tiles for what comes next. -->
-  <section class="bg-background py-3" aria-label="Upcoming products">
+  <section class="pb-3" aria-label="Upcoming products">
     <Tiles />
   </section>
 
-  <!-- Panel 4: full-bleed photo with the studio's promise. -->
-  <section class="relative isolate flex min-h-[640px] items-start justify-center overflow-hidden bg-[oklch(0.1_0_0)] text-white sm:min-h-[760px]" aria-labelledby="promise">
-    <Image
-      src={dark}
-      alt=""
-      widths={[768, 1280, 1920, 2560]}
-      sizes="100vw"
-      format="webp"
-      quality={82}
-      class="absolute inset-0 -z-10 size-full object-cover object-[50%_4%]"
-      loading="lazy"
-    />
-    <div class="absolute inset-x-0 top-0 -z-10 h-1/2 bg-gradient-to-b from-black/70 to-transparent" aria-hidden="true"></div>
-    <div class="mx-auto max-w-3xl px-5 pt-20 text-center sm:pt-24">
-      <h2 id="promise" class="t-panel">Quiet by design.</h2>
-      <p class="t-sub mt-3 text-white/85">No pop-ups and no noise. The screen belongs to your work.</p>
-    </div>
-  </section>
-
-  <!-- Panel 5: the promise in one paragraph. -->
-  <section class="bg-panel" aria-labelledby="how">
+  <!-- Panel 4: the promise in one paragraph. -->
+  <section class="bg-background" aria-labelledby="how">
     <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
       <h2 id="how" class="t-panel">Made to last.</h2>
       <p class="t-statement mx-auto mt-6 max-w-2xl text-muted-foreground">
@@ -90,9 +56,9 @@ const domain = novelos.url.replace(/^https?:\/\//, "");
     </div>
   </section>
 
-  <!-- Panel 6: founder. -->
-  <section class="bg-background" aria-labelledby="founder">
-    <div class="mx-auto max-w-3xl px-5 py-20 sm:py-24">
+  <!-- Panel 5: founder. -->
+  <section class="px-3 pb-3" aria-labelledby="founder">
+    <div class="rounded-[28px] bg-panel px-5 py-20 sm:py-24">
       <h2 id="founder" class="sr-only">Founder</h2>
       <Founder />
     </div>

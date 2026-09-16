@@ -6,9 +6,9 @@ The name comes from Taraxacum, the Latin name for the dandelion, which is also t
 
 ## Products
 
-- [NovelOS Studio](https://novelos.studio): The operating system for storytellers. A desktop app to plan, write, and export a novel in one place. Available for Windows and macOS.
-- PixelOS Studio: In progress. For people who draw.
-- TypeOS Studio: In progress. For people who type.
+- [NovelOS Studio](https://novelos.studio): The operating system for storytellers. Plan, write, and publish a novel in one place. Runs on Windows and macOS, plus Android and iOS as an installable web app (PWA). Price: $45 one-time, lifetime personal license. Features: plot, scenes, and timeline; a cast of characters linked into the manuscript; maps and worldbuilding notes; a calm full-screen editor; word goals; export to eight publication formats; files stay local and offline.
+- PixelOS Studio: In progress. For indie 2D artists and 2D game developers. A pixel art editor with a tilemap editor, 8-bit music, and managers for FX and HUD assets.
+- TypeOS Studio: In progress. For typographers and type foundries.
 
 ## Pages
 

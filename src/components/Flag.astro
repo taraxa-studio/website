@@ -1,0 +1,12 @@
+---
+// The flag of Indonesia. Drawn inline so it renders the same on every OS
+// (emoji flags do not render on Windows).
+interface Props { class?: string }
+const { class: className = "h-3.5 w-5" } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 30 20" role="img" aria-label="Flag of Indonesia">
+  <rect width="30" height="10" fill="#E70011"></rect>
+  <rect y="10" width="30" height="10" fill="#FFFFFF"></rect>
+  <rect x="0.5" y="0.5" width="29" height="19" fill="none" stroke="rgba(0,0,0,0.12)"></rect>
+</svg>

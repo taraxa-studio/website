@@ -1,0 +1,44 @@
+---
+/**
+ * Telegram-style bottom navigation: a fixed glass bar with four items,
+ * icon above label, the current page filled. Full width on phones, a
+ * centered pill on larger screens. Sits above the iOS home indicator via
+ * the safe-area inset.
+ */
+import Icon from "@/components/Icon.astro";
+import { nav } from "@/lib/site";
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<nav
+  aria-label="Main"
+  class="fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 sm:pb-5"
+>
+  <ul
+    class="glass flex w-full max-w-md items-stretch justify-between gap-1 rounded-[22px] p-1.5 sm:w-auto sm:min-w-[420px]"
+  >
+    {
+      nav.map((item) => {
+        const active = current === item.href;
+        return (
+          <li class="flex-1">
+            <a
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              class:list={[
+                "flex h-14 flex-col items-center justify-center gap-0.5 rounded-2xl text-[11px] font-medium tracking-tight outline-none transition-[background-color,color,transform] duration-200 focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.97] sm:h-[52px] sm:min-w-[88px]",
+                active
+                  ? "bg-foreground text-background"
+                  : "text-foreground/75 hover:bg-foreground/[0.06] hover:text-foreground",
+              ]}
+            >
+              <Icon name={item.icon} class="size-[22px]" />
+              <span>{item.label}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

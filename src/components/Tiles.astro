@@ -6,9 +6,8 @@
 import { Image } from "astro:assets";
 import soft from "@/assets/images/dandelion-soft.jpg";
 import snow from "@/assets/images/dandelion-snow.jpg";
-import { site } from "@/lib/site";
+import { upcoming } from "@/lib/site";
 
-const upcoming = site.products.filter((p) => p.status === "upcoming");
 const photos = {
   pixelos: { src: soft, alt: "A white dandelion seed head against a pale wall." },
   typeos: { src: snow, alt: "A single dandelion standing in snow." },
@@ -20,11 +19,12 @@ const photos = {
     upcoming.map((p) => {
       const photo = photos[p.slug as keyof typeof photos];
       return (
-        <section class="relative flex min-h-[560px] flex-col overflow-hidden rounded-[28px] bg-panel sm:min-h-[640px]" aria-labelledby={`tile-${p.slug}`}>
-          <div class="relative z-10 px-6 pt-14 text-center">
+        <section class="relative flex min-h-[600px] flex-col overflow-hidden rounded-[28px] bg-panel sm:min-h-[680px]" aria-labelledby={`tile-${p.slug}`}>
+          <div class="relative z-10 mx-auto max-w-sm px-6 pt-14 text-center">
             <h3 id={`tile-${p.slug}`} class="t-tile">{p.name}</h3>
             <p class="t-sub mt-2">{p.short}</p>
-            <p class="t-body mt-3 text-muted-foreground">In progress</p>
+            <p class="t-body mt-3 text-muted-foreground">{p.description}</p>
+            <p class="mt-4 inline-flex h-7 items-center rounded-full bg-background px-3 text-xs font-medium">In progress</p>
           </div>
           <Image
             src={photo.src}
@@ -32,7 +32,7 @@ const photos = {
             widths={[640, 960, 1280]}
             sizes="(min-width: 1440px) 708px, (min-width: 640px) 50vw, 100vw"
             format="webp"
-            class="absolute inset-x-0 bottom-0 h-[62%] w-full object-cover object-top [mask-image:linear-gradient(to_bottom,transparent,black_28%)]"
+            class="absolute inset-x-0 bottom-0 h-[56%] w-full object-cover object-top [mask-image:linear-gradient(to_bottom,transparent,black_30%)]"
             loading="lazy"
           />
         </section>

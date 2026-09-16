@@ -1,0 +1,61 @@
+---
+/**
+ * NovelOS Studio panel: logo, name, one line, the platforms it runs on,
+ * a short feature list, the price, and two actions. Used on home and work.
+ */
+import { Image } from "astro:assets";
+import Icon from "@/components/Icon.astro";
+import Chevron from "@/components/Chevron.astro";
+import { buttonVariants } from "@/components/ui/button";
+import logo from "@/assets/images/novelos-logo.webp";
+import { novelos } from "@/lib/site";
+
+interface Props {
+  heading?: "h1" | "h2";
+  /** "panel" paints the gray background itself; "plain" leaves it to the parent. */
+  surface?: "panel" | "plain";
+}
+const { heading = "h2", surface = "panel" } = Astro.props;
+const Heading = heading;
+const domain = novelos.url.replace(/^https?:\/\//, "");
+---
+
+<div class:list={["mx-auto flex flex-col items-center px-6 py-20 text-center sm:py-24", surface === "panel" && "rounded-[28px] bg-panel"]}>
+  <Image src={logo} alt="" width={96} height={96} densities={[1, 2]} class="size-20 rounded-[22px] shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)] sm:size-24" loading="lazy" />
+  <Heading id="novelos" class="t-panel mt-8">{novelos.name}</Heading>
+  <p class="t-sub mt-2">{novelos.short}</p>
+  <p class="t-body mx-auto mt-4 max-w-md text-muted-foreground">{novelos.description}</p>
+
+  <ul class="mt-7 flex flex-wrap items-center justify-center gap-2" aria-label="Runs on">
+    {
+      novelos.platforms.map((p) => (
+        <li class="inline-flex h-9 items-center gap-2 rounded-full bg-background px-3.5 text-sm">
+          <Icon name={p.icon} class="size-4" title={p.name} />
+          <span>{p.name}</span>
+          {p.note && <span class="text-muted-foreground">{p.note}</span>}
+        </li>
+      ))
+    }
+  </ul>
+
+  <ul class="mx-auto mt-10 grid w-full max-w-2xl gap-x-8 gap-y-3 text-left sm:grid-cols-2" aria-label="What it does">
+    {
+      novelos.features.map((f) => (
+        <li class="t-body flex items-start gap-3">
+          <Icon name="check" class="mt-[5px] size-4 shrink-0" />
+          <span>{f}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mt-10">
+    <span class="t-tile">{novelos.price.label}</span>
+    <span class="t-body ml-2 text-muted-foreground">{novelos.price.note}</span>
+  </p>
+
+  <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+    <a href={novelos.url} rel="noopener" target="_blank" class={buttonVariants()}>Visit {domain}</a>
+    <a href="/about" class={buttonVariants({ variant: "link" })}>About the studio<Chevron /></a>
+  </div>
+</div>

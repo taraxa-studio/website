@@ -1,7 +1,7 @@
 ---
 /**
  * Centered founder block in the OpenAI "people" register:
- * avatar, name, role, two gray pill links.
+ * avatar, name, role, two gray pill links with icons.
  */
 import { Image } from "astro:assets";
 import avatar from "@/assets/images/ribhararnus.jpg";
@@ -27,7 +27,7 @@ import { site } from "@/lib/site";
       <Icon name="github" class="size-4" />GitHub
     </a>
     <a href={site.founder.linkedin} rel="me noopener" target="_blank" class={buttonVariants({ variant: "secondary", size: "sm" })}>
-      <Icon name="linkedin" class="size-4" />LinkedIn
+      <Icon name="linkedin" class="size-4 text-[#0A66C2]" />LinkedIn
     </a>
   </div>
 </div>
