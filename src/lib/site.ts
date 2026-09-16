@@ -5,7 +5,7 @@ export const site = {
   description:
     "Taraxa Studio is a software company in Indonesia. We build focused tools for writers, pixel artists, and type designers, starting with NovelOS Studio.",
   /** One line under the tagline on the home page. Speaks as a company. */
-  intro: "A software company in Indonesia. We build focused tools for writers, pixel artists, and type designers.",
+  intro: "We build focused tools for creative people.",
   email: "hello@taraxa.studio",
   country: "Indonesia",
   countryCode: "ID",
@@ -31,8 +31,8 @@ export const novelos = {
   url: "https://novelos.studio",
   short: "The operating system for storytellers.",
   description:
-    "Plan, write, and publish a novel in one offline-first app. Your manuscript, cast, world, and plot live together on your own computer.",
-  price: { amount: 45, currency: "USD", label: "$45", note: "Pay once. Yours for life." },
+    "Plan, write, and publish a novel in one offline-first app. Your manuscript, cast, world, and plot live together on your own device.",
+  price: { amount: 45, currency: "USD", label: "$45", note: "One-time purchase. Yours for life." },
   platforms: [
     { name: "Windows", icon: "windows", color: "text-[#0078D4]" },
     { name: "macOS", icon: "apple", color: "text-[#1d1d1f]" },
@@ -42,7 +42,7 @@ export const novelos = {
   features: [
     {
       title: "Offline first",
-      body: "Works without internet. Every file stays on your disk, and one .novelos archive moves a whole project to another computer.",
+      body: "Works without internet. Every file stays on your device, and one .novelos archive moves a whole project to another one.",
     },
     {
       title: "A calm editor",
@@ -54,11 +54,19 @@ export const novelos = {
     },
     {
       title: "A cast that stays in character",
-      body: "Dossiers, roles, ages, pronouns, and a family tree you build by dragging relations, all linked into the manuscript.",
+      body: "Dossiers with role, age, era, and pronouns, plus portraits that keep one art direction, all linked into the manuscript so nobody drifts by book three.",
     },
     {
-      title: "A world in one place",
-      body: "Maps, locations, lore, and chronology attached to the scenes that use them, instead of six loose documents.",
+      title: "Genealogy",
+      body: "Family trees you build by dragging relations between characters. Bloodlines, marriages, and rivalries stay straight across a whole series.",
+    },
+    {
+      title: "Cartography",
+      body: "Draw a map from a written description, name every location, and search them later. Places link to the scenes set there.",
+    },
+    {
+      title: "Lore and chronology",
+      body: "Histories, cultures, magic systems, and dates kept in one place and attached to the scenes that use them, instead of six loose documents.",
     },
     {
       title: "Optional AI, your own key",

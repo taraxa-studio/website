@@ -39,11 +39,9 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
               <a
                 href={item.href}
                 data-tab={i}
+                data-on={active ? "1" : "0"}
                 aria-current={active ? "page" : undefined}
-                class:list={[
-                  "relative z-10 flex h-14 flex-col items-center justify-center gap-0.5 rounded-[20px] text-[11px] font-medium tracking-tight outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-ring sm:h-[54px] sm:w-[92px]",
-                  active ? "text-background" : "text-foreground/80 hover:text-foreground",
-                ]}
+                class="tab relative z-10 flex h-14 flex-col items-center justify-center gap-0.5 rounded-[20px] text-[11px] font-medium tracking-tight outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-ring sm:h-[54px] sm:w-[92px]"
               >
                 <Icon name={item.icon} class="size-[22px]" />
                 <span>{item.label}</span>
@@ -75,6 +73,11 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
   [data-hover] .tab-lens {
     transform: translateX(calc(var(--hover) * 100%));
   }
+  /* Unlayered, so it wins over the utility layer: the tab under the lens is
+     always white, whether it is the current page or the hovered one. */
+  .tab { color: color-mix(in oklch, var(--foreground) 80%, transparent); }
+  .tab:hover { color: var(--foreground); }
+  .tab[data-on="1"], .tab[data-on="1"]:hover { color: var(--background); }
   @media (prefers-reduced-motion: reduce) {
     .tab-lens { transition: none; }
   }
@@ -91,12 +94,10 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
     const path = window.location.pathname.replace(/\/$/, "") || "/";
     let active = Math.max(0, links.findIndex((a) => a.getAttribute("href") === path));
     bar.style.setProperty("--active", String(active));
+    const paint = (on: number) => links.forEach((a, i) => a.setAttribute("data-on", i === on ? "1" : "0"));
+    paint(active);
     links.forEach((a, i) => {
-      const on = i === active;
-      a.classList.toggle("text-background", on);
-      a.classList.toggle("text-foreground/80", !on);
-      a.classList.toggle("hover:text-foreground", !on);
-      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+      if (i === active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
 
     if (!bar.dataset.bound) {
@@ -106,13 +107,12 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
           if (e.pointerType !== "mouse") return;
           bar.style.setProperty("--hover", String(i));
           bar.setAttribute("data-hover", "");
-          links.forEach((l, j) => l.classList.toggle("text-background", j === i));
+          paint(i);
         });
       });
       bar.addEventListener("pointerleave", () => {
         bar.removeAttribute("data-hover");
-        const cur = Number(bar.style.getPropertyValue("--active") || 0);
-        links.forEach((l, j) => l.classList.toggle("text-background", j === cur));
+        paint(Number(bar.style.getPropertyValue("--active") || 0));
       });
     }
   };

@@ -2,8 +2,8 @@
 /**
  * Seed burst on click. The cursor is the normal system cursor; only a real
  * click releases seeds: pointer down and up within a few pixels, on
- * something that is not a text field, and without a text selection being
- * made. Drags and selections do nothing. Drawn on one fixed canvas so the
+ * something that is not a text field or the navigation, and without a text
+ * selection being made. Drags and selections do nothing. Drawn on one fixed canvas so the
  * page never re-renders. Skipped under prefers-reduced-motion.
  */
 ---
@@ -59,7 +59,7 @@
     // field, and no selection was made.
     let downX = 0, downY = 0, downAt = 0;
     const isField = (el: EventTarget | null) =>
-      el instanceof HTMLElement && !!el.closest("input, textarea, select, [contenteditable='true']");
+      el instanceof HTMLElement && !!el.closest("input, textarea, select, [contenteditable='true'], #tabbar, header");
 
     window.addEventListener("pointerdown", (e) => {
       downX = e.clientX; downY = e.clientY; downAt = e.timeStamp;
