@@ -1,21 +1,22 @@
 ---
 /**
- * Seed burst on click. The cursor itself is a real CSS cursor image
- * (see global.css), so it is always visible and never lags. Every click
- * releases a puff of dandelion seeds from that point; they drift up, spin
- * a little, and dissolve. Drawn on one fixed canvas so the page itself
- * never re-renders. Skipped under prefers-reduced-motion.
+ * Seed burst on click. The cursor is the normal system cursor; only a real
+ * click releases seeds: pointer down and up within a few pixels, on
+ * something that is not a text field, and without a text selection being
+ * made. Drags and selections do nothing. Drawn on one fixed canvas so the
+ * page never re-renders. Skipped under prefers-reduced-motion.
  */
 ---
 
-<canvas id="seeds" class="pointer-events-none fixed inset-0 z-[60] hidden size-full" aria-hidden="true"></canvas>
+<canvas id="seeds" transition:persist class="pointer-events-none fixed inset-0 z-60 hidden size-full" aria-hidden="true"></canvas>
 
 <script>
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canvas = document.getElementById("seeds") as HTMLCanvasElement | null;
-  const ctx = canvas?.getContext("2d");
+  const context = canvas?.getContext("2d");
 
-  if (canvas && ctx && !reduced) {
+  if (canvas && context && !reduced) {
+    const ctx: CanvasRenderingContext2D = context;
     canvas.classList.remove("hidden");
 
     const resize = () => {
@@ -33,6 +34,7 @@
     };
     const seeds: Seed[] = [];
     let raf = 0;
+    let last = 0;
 
     const burst = (x: number, y: number) => {
       const n = 24 + Math.floor(Math.random() * 10);
@@ -52,7 +54,27 @@
       }
       if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
     };
-    window.addEventListener("pointerdown", (e) => burst(e.clientX, e.clientY), { passive: true });
+
+    // Only a clean click counts: same spot on down and up, not in a text
+    // field, and no selection was made.
+    let downX = 0, downY = 0, downAt = 0;
+    const isField = (el: EventTarget | null) =>
+      el instanceof HTMLElement && !!el.closest("input, textarea, select, [contenteditable='true']");
+
+    window.addEventListener("pointerdown", (e) => {
+      downX = e.clientX; downY = e.clientY; downAt = e.timeStamp;
+    }, { passive: true });
+
+    window.addEventListener("pointerup", (e) => {
+      if (e.button !== 0 && e.pointerType === "mouse") return;
+      if (isField(e.target)) return;
+      const moved = Math.hypot(e.clientX - downX, e.clientY - downY) > 6;
+      const slow = e.timeStamp - downAt > 600;
+      const sel = window.getSelection();
+      const selecting = !!sel && !sel.isCollapsed && sel.toString().length > 0;
+      if (moved || slow || selecting) return;
+      burst(e.clientX, e.clientY);
+    }, { passive: true });
 
     const drawSeed = (s: Seed, alpha: number) => {
       ctx.save();
@@ -81,7 +103,6 @@
       ctx.restore();
     };
 
-    let last = performance.now();
     function tick(now: number) {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;

@@ -21,7 +21,7 @@ const schema = [
     description: novelos.description,
     applicationCategory: "Writing",
     operatingSystem: "Windows, macOS, Android, iOS",
-    featureList: novelos.features.join(", "),
+    featureList: novelos.features.map((f) => f.title).join(", "),
     offers: {
       "@type": "Offer",
       price: novelos.price.amount,

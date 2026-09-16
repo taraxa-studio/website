@@ -1,14 +1,14 @@
 # Taraxa Studio
 
-> Taraxa Studio is a small software studio based in Indonesia. Tagline: "A Simple Software". We make small, focused apps that do one job well. Founded by Ribhararnus Pracutian.
+> Taraxa Studio is a software company based in Indonesia. Tagline: "A Simple Software". We build focused tools for writers, pixel artists, and type designers. Founded by Ribhararnus Pracutian.
 
 The name comes from Taraxacum, the Latin name for the dandelion, which is also the studio's mark.
 
 ## Products
 
-- [NovelOS Studio](https://novelos.studio): The operating system for storytellers. Plan, write, and publish a novel in one place. Runs on Windows and macOS, plus Android and iOS as an installable web app (PWA). Price: $45 one-time, lifetime personal license. Features: plot, scenes, and timeline; a cast of characters linked into the manuscript; maps and worldbuilding notes; a calm full-screen editor; word goals; export to eight publication formats; files stay local and offline.
-- PixelOS Studio: In progress. For indie 2D artists and 2D game developers. A pixel art editor with a tilemap editor, 8-bit music, and managers for FX and HUD assets.
-- TypeOS Studio: In progress. For typographers and type foundries.
+- [NovelOS Studio](https://novelos.studio): The operating system for storytellers. An offline-first app to plan, write, and publish a novel. Runs on Windows and macOS, plus Android and iOS as an installable web app (PWA). Price: $45 one-time, lifetime personal license. Features: offline-first with local files and portable .novelos archives; a calm editor with chapters, typewriter scrolling, and vanishing mode; plot canvas and timeline; character dossiers and family trees linked to the manuscript; maps, lore, and chronology; optional AI revision on your own API key (BYOK); export to DOCX, EPUB, PDF, HTML, Markdown, RTF, and plain text; word goals and trackers; interface in 23 languages.
+- PixelOS Studio: In progress. For indie 2D artists and 2D game developers. Pixel art editor with layers, palettes, and animation frames; tilemap editor; 8-bit music and sound effects; FX and HUD asset managers.
+- TypeOS Studio: In progress. For typographers and type foundries. Bézier drawing with spacing and kerning; multiple masters and variable fonts; OpenType feature generation; opens and converts OTF, TTF, WOFF, WOFF2, UFO, and Glyphs files; color fonts, hinting, proofing sheets; specimen pages and license files.
 
 ## Pages
 

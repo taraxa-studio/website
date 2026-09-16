@@ -183,15 +183,6 @@
   &:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 }
 
-/* The cursor is the studio mark, hotspot at the seed's tip. PNG at 1x and 2x;
-   browsers without image-set() take the plain url() line. Touch devices ignore it. */
-@media (pointer: fine) {
-  html, html a, html button, html [role="button"], html input, html textarea, html label {
-    cursor: url("/cursor.png") 6 5, auto;
-    cursor: image-set(url("/cursor.png") 1x, url("/cursor@2x.png") 2x) 6 5, auto;
-  }
-}
-
 @utility glass {
   background: color-mix(in oklch, var(--background) 72%, transparent);
   -webkit-backdrop-filter: blur(24px) saturate(180%);

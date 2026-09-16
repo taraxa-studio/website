@@ -36,8 +36,8 @@ public/
 
 - Light only. The palette and type scale follow apple.com and openai.com: white and #f5f5f7 panels, #1d1d1f ink, 56px panel headlines, 28px subheads, 44px pill buttons, 44px translucent nav.
 - Home is a stack of full-bleed panels: hero with an isolated dandelion, NovelOS Studio, two product tiles, a photo panel, a statement, the founder.
-- Navigation is a Telegram-style glass tab bar fixed to the bottom (`BottomNav.astro`). The top bar carries only the mark and wordmark, centered.
-- The cursor is a real CSS cursor image (`public/cursor.png` and `cursor@2x.png`, the studio mark with a white outline, hotspot 6,5) applied on fine-pointer devices in `global.css`. `Dandelion.astro` releases a puff of seeds on every click, skipped under `prefers-reduced-motion`.
+- Navigation is a floating glass tab bar after Telegram's Liquid Glass bottom bar (`BottomNav.astro`): one dark lens slides under the hovered or current tab. The bar and the seed canvas are marked `transition:persist`, and `ClientRouter` is on, so the lens glides on navigation instead of snapping. The top bar carries only the mark and wordmark, centered.
+- The cursor is the normal system cursor. `Dandelion.astro` releases a puff of seeds on a clean click only (no drag, no text selection, not inside a field), skipped under `prefers-reduced-motion`.
 - Brand icons: GitHub from `simple-icons`, LinkedIn inlined in `Icon.astro` (simple-icons no longer ships it).
 - Search and AI-search files live in `public/`: `robots.txt` allows the major AI crawlers, `llms.txt` describes the studio, and the sitemap is generated at build.
 - Structured data (Organization, Person, WebSite, plus a page type per route) is emitted from `Base.astro`.

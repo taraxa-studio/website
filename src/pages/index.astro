@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
   <section class="bg-background" aria-labelledby="hero">
     <div class="mx-auto max-w-3xl px-5 pt-12 pb-10 text-center sm:pt-16 sm:pb-12">
       <h1 id="hero" class="t-hero rise">{site.tagline}</h1>
-      <p class="t-sub rise mt-3 [animation-delay:80ms]">Small apps that do one job well.</p>
+      <p class="t-sub rise mx-auto mt-4 max-w-2xl [animation-delay:80ms]">{site.intro}</p>
       <div class="rise mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 [animation-delay:140ms]">
         <a href="/work" class={buttonVariants()}>See our work</a>
         <a href="/about" class={buttonVariants({ variant: "link" })}>About the studio<Chevron /></a>
@@ -51,7 +51,7 @@ import { site } from "@/lib/site";
     <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
       <h2 id="how" class="t-panel">Made to last.</h2>
       <p class="t-statement mx-auto mt-6 max-w-2xl text-muted-foreground">
-        Each app has a clear purpose. We leave the rest out, change things slowly, and keep your files yours.
+        Our apps work offline and keep your files on your own computer. You pay once, not every month. Everything you make exports to open formats, so your work still opens even if we are gone.
       </p>
     </div>
   </section>

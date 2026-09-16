@@ -1,7 +1,8 @@
 ---
 /**
- * Brand footer: the mark and wordmark set large, the studio's line, social
- * icons, then a hairline with the copyright and "Made in Indonesia".
+ * Brand footer, centered: the mark and wordmark set large, social icons,
+ * the three page links, then a hairline with the copyright and
+ * "Made in Indonesia".
  */
 import Mark from "@/components/Mark.astro";
 import Icon from "@/components/Icon.astro";
@@ -10,9 +11,9 @@ import { site } from "@/lib/site";
 
 const year = new Date().getFullYear();
 const social = [
-  { label: "GitHub", href: site.github, icon: "github" as const, color: "" },
+  { label: "GitHub", href: site.github, icon: "github" as const, color: "text-foreground" },
   { label: "LinkedIn", href: site.founder.linkedin, icon: "linkedin" as const, color: "text-[#0A66C2]" },
-  { label: "Email", href: `mailto:${site.email}`, icon: "mail" as const, color: "" },
+  { label: "Email", href: `mailto:${site.email}`, icon: "mail" as const, color: "text-foreground" },
 ];
 const links = [
   { label: "Work", href: "/work" },
@@ -21,54 +22,48 @@ const links = [
 ];
 ---
 
-<footer class="bg-panel pb-28 sm:pb-32">
-  <div class="mx-auto w-full max-w-5xl px-5 pt-16 sm:px-6 sm:pt-20">
-    <div class="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <a href="/" class="inline-flex items-center gap-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" aria-label={`${site.name} home`}>
-          <Mark class="size-14 shrink-0 sm:size-16" />
-          <span class="t-tile">{site.name}</span>
-        </a>
-        <p class="t-body mt-5 max-w-sm text-muted-foreground">
-          {site.tagline}. Named after the dandelion.
-        </p>
-        <ul class="mt-6 flex gap-2">
-          {
-            social.map((s) => (
-              <li>
-                <a
-                  href={s.href}
-                  rel="me noopener"
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  aria-label={s.label}
-                  title={s.label}
-                  class:list={[
-                    "inline-flex size-11 items-center justify-center rounded-full bg-background outline-none transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-10px_rgba(0,0,0,0.35)] focus-visible:ring-2 focus-visible:ring-ring",
-                    s.color || "text-foreground",
-                  ]}
-                >
-                  <Icon name={s.icon} class="size-5" />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+<footer class="bg-panel pb-32 sm:pb-36">
+  <div class="mx-auto flex w-full max-w-5xl flex-col items-center px-5 pt-16 text-center sm:px-6 sm:pt-20">
+    <a href="/" class="inline-flex items-center gap-4 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" aria-label={`${site.name} home`}>
+      <Mark class="size-14 shrink-0 sm:size-16" />
+      <span class="t-tile">{site.name}</span>
+    </a>
 
-      <ul class="flex gap-6 text-sm text-muted-foreground">
-        {
-          links.map((l) => (
-            <li>
-              <a href={l.href} class="rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
-                {l.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+    <ul class="mt-8 flex gap-2">
+      {
+        social.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              rel="me noopener"
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              aria-label={s.label}
+              title={s.label}
+              class:list={[
+                "inline-flex size-11 items-center justify-center rounded-full bg-background outline-none transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-10px_rgba(0,0,0,0.35)] focus-visible:ring-2 focus-visible:ring-ring",
+                s.color,
+              ]}
+            >
+              <Icon name={s.icon} class="size-5" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
-    <div class="mt-14 flex flex-col gap-3 border-t border-border/70 pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+    <ul class="mt-6 flex gap-6 text-sm text-muted-foreground">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} class="rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-12 flex w-full flex-col items-center gap-3 border-t border-border/70 pt-5 text-xs text-muted-foreground sm:flex-row sm:justify-between">
       <p>Copyright &copy; {year} {site.name}.</p>
       <p class="inline-flex items-center gap-2">
         <Flag class="h-3.5 w-5 rounded-[2px]" />
