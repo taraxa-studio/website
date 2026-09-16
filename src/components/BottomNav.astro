@@ -5,7 +5,9 @@
  * content, a soft refraction highlight along its top edge, and one rounded
  * "lens" that slides under the active tab. The Telegram UI kit's Tabbar
  * (@telegram-apps/telegram-ui) uses the same shape: icon over label,
- * four to five items, the current one filled.
+ * four to five items, the current one filled. Icons are Microsoft's
+ * Fluent Emoji in the 3D style (MIT, github.com/microsoft/fluentui-emoji),
+ * shipped as 72px WebP files in public/icons.
  *
  * The lens is one element moved with a transform. It moves only on a
  * click. The bar is persisted across Astro page navigations, so on each
@@ -13,7 +15,7 @@
  * On a hard load, the tab you came from is read back from sessionStorage
  * and the lens glides in from it. Hover only darkens the label.
  */
-import Icon from "@/components/Icon.astro";
+import { Image } from "astro:assets";
 import { nav } from "@/lib/site";
 
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -45,7 +47,7 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
                 aria-current={active ? "page" : undefined}
                 class="tab relative z-10 flex h-14 flex-col items-center justify-center gap-0.5 rounded-[20px] text-[11px] font-medium tracking-tight outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-ring sm:h-[54px] sm:w-[92px]"
               >
-                <Icon name={item.icon} class="size-[22px]" />
+                <Image src={`/icons/${item.icon}.webp`} alt="" width={72} height={72} class="size-6 sm:size-[26px]" data-invert={"invert" in item && item.invert ? "1" : undefined} loading="eager" decoding="async" />
                 <span>{item.label}</span>
               </a>
             </li>
@@ -77,6 +79,8 @@ const activeIndex = Math.max(0, nav.findIndex((n) => n.href === current));
   .tab { color: color-mix(in oklch, var(--foreground) 80%, transparent); }
   .tab:hover { color: var(--foreground); }
   .tab[data-on="1"], .tab[data-on="1"]:hover { color: var(--background); }
+  /* The silhouette icon is dark; invert it on the dark lens so it stays visible. */
+  .tab[data-on="1"] img[data-invert] { filter: invert(1) brightness(1.1); }
   @media (prefers-reduced-motion: reduce) {
     .tab-lens { transition: none; }
   }

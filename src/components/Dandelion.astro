@@ -59,7 +59,7 @@
     // field, and no selection was made.
     let downX = 0, downY = 0, downAt = 0;
     const isField = (el: EventTarget | null) =>
-      el instanceof HTMLElement && !!el.closest("input, textarea, select, [contenteditable='true'], #tabbar, header");
+      el instanceof Element && !!el.closest("input, textarea, select, [contenteditable='true'], #tabbar, header, nav");
 
     window.addEventListener("pointerdown", (e) => {
       downX = e.clientX; downY = e.clientY; downAt = e.timeStamp;

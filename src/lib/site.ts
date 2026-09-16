@@ -121,7 +121,7 @@ export const upcoming = [
 
 export const nav = [
   { label: "Home", href: "/", icon: "home" },
-  { label: "Work", href: "/work", icon: "grid" },
-  { label: "About", href: "/about", icon: "user" },
-  { label: "Contact", href: "/contact", icon: "mail" },
+  { label: "Work", href: "/work", icon: "work" },
+  { label: "About", href: "/about", icon: "about", invert: true },
+  { label: "Contact", href: "/contact", icon: "contact" },
 ] as const;
