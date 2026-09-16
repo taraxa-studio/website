@@ -1,0 +1,30 @@
+# Taraxa Studio
+
+> Taraxa Studio is a small software studio based in Indonesia. Tagline: "A Simple Software". We make small, focused apps that do one job well. Founded by Ribhararnus Pracutian.
+
+The name comes from Taraxacum, the Latin name for the dandelion, which is also the studio's mark.
+
+## Products
+
+- [NovelOS Studio](https://novelos.studio): The operating system for storytellers. A desktop app to plan, write, and export a novel in one place. Available for Windows and macOS.
+- PixelOS Studio: In progress. For people who draw.
+- TypeOS Studio: In progress. For people who type.
+
+## Pages
+
+- [Home](https://taraxa.studio/): What the studio makes and how it works.
+- [Work](https://taraxa.studio/work): The product list.
+- [About](https://taraxa.studio/about): The studio, the name, and the founder.
+- [Contact](https://taraxa.studio/contact): Email hello@taraxa.studio.
+
+## Founder
+
+- Ribhararnus Pracutian: https://github.com/oknoorap, https://www.linkedin.com/in/oknoorap/
+
+## Facts
+
+- Company: Taraxa Studio
+- Location: Indonesia
+- Website: https://taraxa.studio
+- Email: hello@taraxa.studio
+- GitHub: https://github.com/taraxa-studio

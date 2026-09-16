@@ -1,0 +1,66 @@
+---
+import Base from "@/layouts/Base.astro";
+import { CopyEmail } from "@/components/CopyEmail";
+import { Image } from "astro:assets";
+import snow from "@/assets/images/dandelion-snow.jpg";
+import { site } from "@/lib/site";
+
+const schema = [
+  {
+    "@type": "ContactPage",
+    "@id": `${site.url}/contact#page`,
+    url: `${site.url}/contact`,
+    name: "Contact Taraxa Studio",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+  },
+];
+---
+
+<Base
+  title="Contact"
+  description={`Email Taraxa Studio at ${site.email}. We are based in Indonesia and reply within a few days.`}
+  schema={schema}
+>
+  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 pt-14 pb-24 sm:px-6 lg:min-h-[calc(100dvh-3.5rem)] lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10 lg:pt-6 lg:pb-16">
+    <div class="lg:col-span-6">
+      <h1 class="display rise text-5xl sm:text-6xl">Say hello.</h1>
+      <p class="measure rise mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl [animation-delay:80ms]">
+        Email is the best way to reach us. We read everything and reply within a few days.
+      </p>
+      <div class="rise mt-10 [animation-delay:140ms]">
+        <a
+          href={`mailto:${site.email}`}
+          class="display inline-block break-all rounded-sm text-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-3xl"
+        >
+          {site.email}
+        </a>
+        <div class="mt-6">
+          <CopyEmail client:idle email={site.email} />
+        </div>
+      </div>
+      <p class="mt-14 text-sm text-muted-foreground">
+        Also on{" "}
+        <a
+          href={site.github}
+          rel="noopener"
+          target="_blank"
+          class="link-quiet rounded-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          GitHub
+        </a>.
+      </p>
+    </div>
+    <div class="rise lg:col-span-5 lg:col-start-8 [animation-delay:120ms]">
+      <Image
+        src={snow}
+        alt="A single dandelion standing in snow."
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1400px) 520px, (min-width: 1024px) 40vw, 100vw"
+        format="webp"
+        class="aspect-[4/5] w-full rounded-2xl object-cover lg:max-h-[calc(100dvh-6.5rem)]"
+        loading="eager"
+      />
+    </div>
+  </section>
+</Base>

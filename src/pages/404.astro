@@ -1,0 +1,16 @@
+---
+import Base from "@/layouts/Base.astro";
+import { buttonVariants } from "@/components/ui/button";
+---
+
+<Base title="Page not found" description="This page does not exist.">
+  <section class="mx-auto flex w-full max-w-[1400px] flex-col items-start px-4 pt-20 pb-32 sm:px-6 lg:px-10 lg:pt-32">
+    <h1 class="display text-5xl sm:text-6xl">Nothing here.</h1>
+    <p class="measure mt-6 text-lg text-muted-foreground">The page you asked for does not exist.</p>
+    <div class="mt-8">
+      <a href="/" class={buttonVariants({ className: "h-11 rounded-full px-6 text-base font-medium" })}>
+        Go home
+      </a>
+    </div>
+  </section>
+</Base>

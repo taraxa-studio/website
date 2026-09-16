@@ -1,0 +1,59 @@
+---
+import Base from "@/layouts/Base.astro";
+import Founder from "@/components/Founder.astro";
+import { Image } from "astro:assets";
+import stem from "@/assets/images/dandelion-stem.jpg";
+import { site } from "@/lib/site";
+
+const schema = [
+  {
+    "@type": "AboutPage",
+    "@id": `${site.url}/about#page`,
+    url: `${site.url}/about`,
+    name: "About Taraxa Studio",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+  },
+];
+---
+
+<Base
+  title="About"
+  description="Taraxa Studio is a small software studio based in Indonesia, founded by Ribhararnus Pracutian. The name comes from Taraxacum, the dandelion."
+  schema={schema}
+>
+  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 pt-14 pb-20 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:pt-20 lg:pb-28">
+    <div class="lg:col-span-6">
+      <h1 class="display rise text-5xl sm:text-6xl">A small studio in Indonesia.</h1>
+      <div class="rise mt-8 space-y-5 text-lg leading-relaxed text-muted-foreground sm:text-xl [animation-delay:80ms]">
+        <p class="measure">
+          Taraxa Studio makes software for people who create. We keep each app small so it stays easy to learn and easy to trust.
+        </p>
+        <p class="measure">
+          The name comes from Taraxacum, the dandelion. It is a plain plant that spreads by letting go. We like that idea, so it became our mark.
+        </p>
+        <p class="measure">
+          Our first app is NovelOS Studio, for writers. PixelOS Studio and TypeOS Studio come next.
+        </p>
+      </div>
+    </div>
+    <div class="rise lg:col-span-5 lg:col-start-8 [animation-delay:120ms]">
+      <Image
+        src={stem}
+        alt="A dandelion with a curved stem, drawn in black on white."
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1400px) 520px, (min-width: 1024px) 40vw, 100vw"
+        format="webp"
+        class="aspect-[4/5] w-full rounded-2xl object-cover"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-[1400px] px-4 pb-24 sm:px-6 lg:px-10 lg:pb-32" aria-labelledby="founder">
+    <div class="border-t border-border/60 pt-10 lg:pt-14">
+      <h2 id="founder" class="mb-8 text-sm font-medium text-muted-foreground">Founder</h2>
+      <Founder size="lg" />
+    </div>
+  </section>
+</Base>

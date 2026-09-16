@@ -1,0 +1,103 @@
+---
+import Base from "@/layouts/Base.astro";
+import ThemePicture from "@/components/ThemePicture.astro";
+import NovelOS from "@/components/NovelOS.astro";
+import Upcoming from "@/components/Upcoming.astro";
+import Founder from "@/components/Founder.astro";
+import { buttonVariants } from "@/components/ui/button";
+import heroLight from "@/assets/images/dandelion-hero.jpg";
+import heroDark from "@/assets/images/dandelion-dark.jpg";
+import howLight from "@/assets/images/dandelion-dark.jpg";
+import howDark from "@/assets/images/dandelion-soft.jpg";
+import { site } from "@/lib/site";
+
+const values = [
+  {
+    title: "One job, done well.",
+    body: "Each app has a clear purpose. We leave the rest out.",
+  },
+  {
+    title: "Quiet by design.",
+    body: "No pop-ups and no noise. The screen belongs to your work.",
+  },
+  {
+    title: "Made to last.",
+    body: "Small team, careful changes, and files that stay yours.",
+  },
+];
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 pt-10 pb-16 sm:px-6 lg:min-h-[calc(100dvh-3.5rem)] lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10 lg:pt-6 lg:pb-12">
+    <div class="rise lg:col-span-5">
+      <h1 class="display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">{site.tagline}</h1>
+      <p class="measure mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl">
+        Taraxa Studio makes small, focused apps. One job each, done with care.
+      </p>
+      <div class="mt-8">
+        <a href="/work" class={buttonVariants({ className: "h-11 rounded-full px-6 text-base font-medium" })}>
+          See our work
+        </a>
+      </div>
+    </div>
+    <div class="rise lg:col-span-7 [animation-delay:120ms]">
+      <ThemePicture
+        light={heroLight}
+        dark={heroDark}
+        alt="A dandelion seed head photographed in black and white."
+        loading="eager"
+        fetchpriority="high"
+        sizes="(min-width: 1400px) 780px, (min-width: 1024px) 58vw, 100vw"
+        class="aspect-[4/5] w-full rounded-2xl object-cover sm:aspect-[5/4] lg:aspect-[4/5] lg:max-h-[calc(100dvh-6.5rem)]"
+      />
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="mx-auto w-full max-w-[1400px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28" aria-labelledby="work">
+    <h2 id="work" class="display text-4xl sm:text-5xl">Work</h2>
+    <div class="mt-12">
+      <NovelOS />
+    </div>
+    <div class="mt-16 lg:mt-20">
+      <h3 class="mb-6 text-sm font-medium text-muted-foreground">Next</h3>
+      <Upcoming />
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="mx-auto grid w-full max-w-[1400px] gap-10 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:py-28" aria-labelledby="how">
+    <div class="lg:col-span-5">
+      <ThemePicture
+        light={howLight}
+        dark={howDark}
+        alt="A white dandelion seed head on a black background."
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1400px) 560px, (min-width: 1024px) 42vw, 100vw"
+        class="aspect-[4/5] w-full rounded-2xl object-cover"
+      />
+    </div>
+    <div class="lg:col-span-6 lg:col-start-7 lg:self-center">
+      <h2 id="how" class="display text-4xl sm:text-5xl">How we work</h2>
+      <ul class="mt-10 divide-y divide-border/60">
+        {
+          values.map((v) => (
+            <li class="py-6 first:pt-0 last:pb-0">
+              <h3 class="text-2xl font-medium tracking-tight">{v.title}</h3>
+              <p class="measure mt-2 text-lg leading-relaxed text-muted-foreground">{v.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="mx-auto w-full max-w-[1400px] px-4 pb-24 sm:px-6 lg:px-10 lg:pb-32" aria-labelledby="founder">
+    <div class="border-t border-border/60 pt-10">
+      <h2 id="founder" class="sr-only">Founder</h2>
+      <Founder />
+    </div>
+  </section>
+</Base>

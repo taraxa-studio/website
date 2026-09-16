@@ -1,0 +1,46 @@
+---
+import Mark from "@/components/Mark.astro";
+import { nav, site } from "@/lib/site";
+
+const year = new Date().getFullYear();
+const links = [
+  ...nav,
+  { label: "NovelOS Studio", href: site.products[0].url, external: true },
+  { label: "GitHub", href: site.github, external: true },
+];
+---
+
+<footer class="border-t border-border/60">
+  <div
+    class="mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-4 py-12 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:px-10 lg:py-16"
+  >
+    <div class="flex items-start gap-3">
+      <Mark class="mt-0.5 size-7 shrink-0" />
+      <div class="text-sm leading-6">
+        <p class="font-medium">{site.name}</p>
+        <p class="text-muted-foreground">{site.tagline}</p>
+        <p class="text-muted-foreground">{site.country}</p>
+      </div>
+    </div>
+
+    <ul class="grid grid-cols-2 gap-x-12 gap-y-3 text-sm sm:flex sm:flex-wrap sm:gap-x-8">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              rel={"external" in l && l.external ? "noopener" : undefined}
+              target={"external" in l && l.external ? "_blank" : undefined}
+              class="link-quiet rounded-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="mx-auto w-full max-w-[1400px] px-4 pb-8 text-xs text-muted-foreground sm:px-6 lg:px-10">
+    <p>&copy; {year} {site.name}</p>
+  </div>
+</footer>
