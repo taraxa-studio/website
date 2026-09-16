@@ -236,8 +236,22 @@
     }
   }
 }
+/* Heartbeat on the avatar: two quick beats, then rest, like a pulse. */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.08); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.06); }
+  60% { transform: scale(1); }
+}
+@utility heartbeat {
+  animation: heartbeat 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: center;
+  will-change: transform;
+}
 @media (prefers-reduced-motion: reduce) {
   .ring-beam::before { animation: none; }
+  .heartbeat { animation: none; }
 }
 
 @keyframes rise {
