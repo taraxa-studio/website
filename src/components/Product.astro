@@ -49,10 +49,10 @@ const domain = product.url.replace(/^https?:\/\//, "");
     }
   </ul>
 
-  <p class="mt-12">
-    <span class="t-tile">{product.price.label}</span>
-    <span class="t-body ml-2 text-muted-foreground">{product.price.note}</span>
-  </p>
+  <div class="mt-12">
+    <p class="t-tile">{product.price.label}</p>
+    <p class="t-body mt-1 text-muted-foreground">{product.price.note}</p>
+  </div>
 
   <div class="mt-7">
     <a href={product.url} rel="noopener" target="_blank" class={buttonVariants()}>Visit {domain}</a>

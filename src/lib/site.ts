@@ -113,8 +113,8 @@ export const sealqr = {
   price: {
     amount: 0,
     currency: "USD",
-    label: "Free",
-    note: "25 dynamic codes. Pro is $48 a year, $4.99 a month, or $80 once for lifetime.",
+    label: "Free to start",
+    note: "Pro is $48 a year.",
   },
   pro: { amount: 48, currency: "USD" },
   platforms: [] as Platform[],
