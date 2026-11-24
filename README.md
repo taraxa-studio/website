@@ -33,13 +33,13 @@ The site runs on Cloudflare Workers with static assets (Cloudflare folded Pages 
 
 ```
 src/
-  components/      Nav (top brand bar), BottomNav (glass tab bar), Footer, Mark, Icon, Flag, Chevron, Tiles, NovelOS, Founder, CopyEmail, Dandelion (seed burst)
+  components/      Nav (top brand bar), BottomNav (glass tab bar), Footer, Mark, Icon, Flag, Chevron, Tiles, Product (NovelOS / SealQR panel), Founder, CopyEmail, Dandelion (seed burst)
   layouts/Base.astro   head, SEO meta, JSON-LD, font preload, nav and footer
-  lib/site.ts      names, links, NovelOS facts (platforms, features, price), upcoming apps, nav. Edit copy here first.
+  lib/site.ts      names, links, NovelOS and SealQR facts (platforms, features, price), upcoming apps, nav. Edit copy here first.
   pages/           index, work, about, contact, 404
 worker/index.ts    edge entry: www redirect, then static assets
 public/
-  images/          WebP photos (lummi.ai dandelions), NovelOS logo, founder avatar, pre-sized to 2x display
+  images/          WebP photos (lummi.ai dandelions), NovelOS and SealQR logos, founder avatar, pre-sized to 2x display
   robots.txt, llms.txt, site.webmanifest, favicons, og.jpg
 ```
 

@@ -1,8 +1,8 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Tiles from "@/components/Tiles.astro";
-import NovelOS from "@/components/NovelOS.astro";
-import { site, novelos } from "@/lib/site";
+import Product from "@/components/Product.astro";
+import { site, novelos, sealqr } from "@/lib/site";
 
 const schema = [
   {
@@ -31,12 +31,40 @@ const schema = [
     },
     author: { "@id": `${site.url}/#organization` },
   },
+  {
+    "@type": "SoftwareApplication",
+    "@id": `${sealqr.url}/#app`,
+    name: sealqr.name,
+    url: sealqr.url,
+    description: sealqr.description,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    featureList: sealqr.features.map((f) => f.title).join(", "),
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Free",
+        price: sealqr.price.amount,
+        priceCurrency: sealqr.price.currency,
+        url: sealqr.url,
+      },
+      {
+        "@type": "Offer",
+        name: "Pro",
+        price: sealqr.pro.amount,
+        priceCurrency: sealqr.pro.currency,
+        url: sealqr.url,
+        description: "Billed yearly. Also $4.99 a month, or $80 once for lifetime.",
+      },
+    ],
+    author: { "@id": `${site.url}/#organization` },
+  },
 ];
 ---
 
 <Base
   title="Work"
-  description="Software made by Taraxa Studio: NovelOS Studio for writers ($45, pay once), with PixelOS Studio for 2D artists and TypeOS Studio for type foundries in progress."
+  description="Software made by Taraxa Studio: NovelOS Studio for writers ($45, pay once) and SealQR for dynamic QR codes (free to start), with PixelOS Studio for 2D artists and TypeOS Studio for type foundries in progress."
   schema={schema}
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 pb-12 text-center sm:pt-16">
@@ -47,7 +75,11 @@ const schema = [
   </section>
 
   <section class="px-3 pb-3" aria-labelledby="novelos">
-    <NovelOS />
+    <Product product={novelos} />
+  </section>
+
+  <section class="px-3 pb-3" aria-labelledby="sealqr">
+    <Product product={sealqr} />
   </section>
 
   <section class="pb-3" aria-labelledby="next">

@@ -2,11 +2,11 @@
 import Base from "@/layouts/Base.astro";
 import Chevron from "@/components/Chevron.astro";
 import Tiles from "@/components/Tiles.astro";
-import NovelOS from "@/components/NovelOS.astro";
+import Product from "@/components/Product.astro";
 import Founder from "@/components/Founder.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
-import { site } from "@/lib/site";
+import { site, novelos } from "@/lib/site";
 ---
 
 <Base>
@@ -35,7 +35,7 @@ import { site } from "@/lib/site";
 
   <!-- Panel 2: NovelOS Studio. -->
   <section class="px-3 pb-3" aria-labelledby="novelos">
-    <NovelOS />
+    <Product product={novelos} />
   </section>
 
   <!-- Panel 3: two tiles for what comes next. -->

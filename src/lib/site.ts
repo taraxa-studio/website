@@ -3,7 +3,7 @@ export const site = {
   tagline: "A Simple Software",
   url: "https://taraxa.studio",
   description:
-    "Taraxa Studio is a software company in Indonesia. We build focused tools for writers, pixel artists, and type designers, starting with NovelOS Studio.",
+    "Taraxa Studio is a software company in Indonesia. We make NovelOS Studio for writers and SealQR for dynamic QR codes, with tools for pixel artists and type designers in progress.",
   /** One line under the tagline on the home page. Speaks as a company. */
   intro: "We build focused tools for creative people.",
   email: "hello@taraxa.studio",
@@ -25,10 +25,24 @@ export type Platform = {
   note?: string;
 };
 
+export type Product = {
+  name: string;
+  slug: string;
+  url: string;
+  /** Square logo in public/, 192px. */
+  logo: string;
+  short: string;
+  description: string;
+  price: { label: string; note: string };
+  platforms: readonly Platform[];
+  features: readonly { title: string; body: string }[];
+};
+
 export const novelos = {
   name: "NovelOS Studio",
   slug: "novelos",
   url: "https://novelos.studio",
+  logo: "/images/novelos-logo.webp",
   short: "The operating system for storytellers.",
   description:
     "Plan, write, and publish a novel in one offline-first app. Your manuscript, cast, world, and plot live together on your own device.",
@@ -83,6 +97,67 @@ export const novelos = {
     {
       title: "Goals that tell the truth",
       body: "Word targets and trackers that show your real pace, chapter by chapter.",
+    },
+  ],
+  status: "available",
+} as const;
+
+export const sealqr = {
+  name: "SealQR",
+  slug: "sealqr",
+  url: "https://sealqr.codes",
+  logo: "/images/sealqr-logo.webp",
+  short: "Dynamic QR codes you can change after printing.",
+  description:
+    "Print a QR code once and change where it goes later. Count scans, and keep your codes working even if you stop paying.",
+  price: {
+    amount: 0,
+    currency: "USD",
+    label: "Free",
+    note: "25 dynamic codes. Pro is $48 a year, $4.99 a month, or $80 once for lifetime.",
+  },
+  pro: { amount: 48, currency: "USD" },
+  platforms: [] as Platform[],
+  features: [
+    {
+      title: "Change the link after printing",
+      body: "A printed code points to a short link, and you choose where that link goes from your dashboard. Menus, flyers, and packaging stay in use.",
+    },
+    {
+      title: "Codes that don't expire",
+      body: "No expiry date on any plan, free included. If a paid plan ends, codes over the free limit keep opening the last link you set.",
+    },
+    {
+      title: "Unlimited scans, no ads",
+      body: "People who scan go straight to your link. There is no ad page in between and no scan limit on either plan.",
+    },
+    {
+      title: "12 code types",
+      body: "Link, Wi-Fi, contact card, PDF, menu, Google review, Instagram, WhatsApp, email, SMS, phone, and text.",
+    },
+    {
+      title: "A scan test before download",
+      body: "Each code is scanned in your browser before you download it, so a setting that breaks scanning shows up before the print run.",
+    },
+    {
+      title: "Links checked for safety",
+      body: "Every link is checked against Cloudflare's malware and phishing lists before a code opens it. Anyone can report a suspicious code.",
+    },
+    {
+      title: "Rules by device, country, or language",
+      body: "On Pro, one code can send people to different links depending on their phone, where they are, or the language they read.",
+    },
+    {
+      title: "Scan pages, forms, and bookings",
+      body: "On Pro, build a page from a template, collect replies with a form and export them as CSV, or share your open times on a booking page.",
+    },
+    {
+      title: "Version history with undo",
+      body: "On Pro, every change to a code is kept, so you can put a wrong link back. Custom short links are included.",
+    },
+    {
+      title: "Scan history",
+      body: "Count scans for each code. Free keeps the last 90 days, and Pro keeps them all.",
     },
   ],
   status: "available",
