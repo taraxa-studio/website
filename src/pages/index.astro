@@ -6,7 +6,7 @@ import Product from "@/components/Product.astro";
 import Founder from "@/components/Founder.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from "astro:assets";
-import { site, novelos } from "@/lib/site";
+import { site, novelos, sealqr } from "@/lib/site";
 ---
 
 <Base>
@@ -38,23 +38,28 @@ import { site, novelos } from "@/lib/site";
     <Product product={novelos} />
   </section>
 
-  <!-- Panel 3: two tiles for what comes next. -->
+  <!-- Panel 3: SealQR. -->
+  <section class="px-3 pb-3" aria-labelledby="sealqr">
+    <Product product={sealqr} />
+  </section>
+
+  <!-- Panel 4: two tiles for what comes next. -->
   <section class="pb-3" aria-labelledby="next">
     <h2 id="next" class="sr-only">Coming next</h2>
     <Tiles />
   </section>
 
-  <!-- Panel 4: the promise in one paragraph. -->
+  <!-- Panel 5: the promise in one paragraph. -->
   <section class="bg-background" aria-labelledby="how">
     <div class="mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
       <h2 id="how" class="t-panel">Made to last.</h2>
       <p class="t-statement mx-auto mt-6 max-w-2xl text-muted-foreground">
-        Our apps work offline and keep your files on your own devices. You pay once, not every month.
+        NovelOS works offline and keeps your files on your own devices, for one payment. SealQR codes never expire and keep working even if you stop paying.
       </p>
     </div>
   </section>
 
-  <!-- Panel 5: founder. -->
+  <!-- Panel 6: founder. -->
   <section class="px-3 pb-3" aria-labelledby="founder">
     <div class="rounded-[28px] bg-panel px-5 py-20 sm:py-24">
       <h2 id="founder" class="sr-only">Founder</h2>

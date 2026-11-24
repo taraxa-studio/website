@@ -46,7 +46,7 @@ public/
 ## Notes
 
 - Light only. The palette and type scale follow apple.com and openai.com: white and #f5f5f7 panels, #1d1d1f ink, 56px panel headlines, 28px subheads, 44px pill buttons, 44px translucent nav.
-- Home is a stack of full-bleed panels: hero with an isolated dandelion, NovelOS Studio, two product tiles, a photo panel, a statement, the founder.
+- Home is a stack of full-bleed panels: hero with an isolated dandelion, NovelOS Studio, SealQR, two product tiles, a photo panel, a statement, the founder.
 - Navigation is a floating glass tab bar after Telegram's Liquid Glass bottom bar (`BottomNav.astro`): one dark lens sits under the current tab and glides to the next one on click. Astro's `ClientRouter` handles page navigation; the bar and the seed canvas are `transition:persist`, and the lens position is also kept in sessionStorage for hard loads. Hover only darkens a label.
 - Images live in `public/images/` as WebP and are rendered through Astro's `<Image>` with explicit width and height. They are pre-sized to about twice their largest display size, so no build-time processing is needed.
 - The founder avatar has a moving border in the style of ui.aceternity.com/components/moving-border, done in CSS with `offset-path` (a conic fallback where unsupported).
